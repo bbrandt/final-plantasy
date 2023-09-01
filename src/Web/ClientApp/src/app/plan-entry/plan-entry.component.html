@@ -1,0 +1,28 @@
+<form [formGroup]="planForm" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label class="form-label" for="planType">Type:</label>
+      <select class="form-control" if="planType" formControlName="planType">
+        <option *ngFor="let planType of planTypes" [ngValue]="planType">
+          {{ planType.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label class="form-label" for="amount">Amount: </label>
+      <input class="form-control" id="amount" type="text" formControlName="amount" />
+    </div>
+
+    <div class="form-group col-md-6">
+      <label class="form-label" for="repeatOnDate">Repeat On: </label>
+      <input class="form-control" id="repeatOnDate" type="text" ngbDatepicker formControlName="repeatOnDate" />
+    </div>
+  </div>
+
+  <p></p>
+  <button class="btn btn-primary" type="submit" [disabled]="!planForm.valid">Submit</button>
+</form>

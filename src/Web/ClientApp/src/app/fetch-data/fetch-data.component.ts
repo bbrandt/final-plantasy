@@ -1,44 +1,40 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observer } from "rxjs";
-import { HttpClient } from '@angular/common/http';
+import { WeatherForecastModel } from './weather-forecast.model';
+import { WeatherService } from './weather.service';
 
 @Component({
   selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  templateUrl: './fetch-data.component.html',
+  providers: [ WeatherService ]
 })
 export class FetchDataComponent {
-  public forecasts: WeatherForecast[] = [];
-  private http: HttpClient;
-  private baseUrl: string;
+  public forecasts: WeatherForecastModel[] = [];
+  #weatherService: WeatherService;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.http = http;
-    this.baseUrl = baseUrl;
+  constructor(
+    weatherService: WeatherService)
+  {
+    this.#weatherService = weatherService;
+  }
 
+  public ngOnInit(): void {
     this.initializeData();
   }
 
   private initializeData(): void {
-    const observer: Observer<WeatherForecast[]> = {
-      next: (result: WeatherForecast[]) => {
+    const observer: Observer<WeatherForecastModel[]> = {
+      next: (result: WeatherForecastModel[]) => {
         this.forecasts = result;
       },
       error: (message: any) => {
         console.error(message);
       },
       complete: function (): void {
-
       }
     };
 
-    this.http.get<WeatherForecast[]>(this.baseUrl + 'weatherforecast')
-      .subscribe(observer);
+    this.#weatherService.fetch(observer);
   }
 }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}

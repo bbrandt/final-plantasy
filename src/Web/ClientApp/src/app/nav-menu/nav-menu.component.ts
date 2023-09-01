@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  public isExpanded: boolean = false;
+  public isExpanded: boolean = true;
 
   public collapse(): void {
     this.isExpanded = false;
