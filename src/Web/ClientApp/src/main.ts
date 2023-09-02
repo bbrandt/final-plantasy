@@ -1,5 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
@@ -9,7 +10,8 @@ export function getBaseUrl() {
 }
 
 const providers = [
-  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+  provideAnimations()
 ];
 
 if (environment.production) {

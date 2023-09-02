@@ -15,10 +15,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.3",
+    "@angular/cdk": "^16.2.2",
     "@angular/common": "^16.2.3",
     "@angular/compiler": "^16.2.3",
     "@angular/core": "^16.2.3",
     "@angular/forms": "^16.2.3",
+    "@angular/material": "^16.2.2",
     "@angular/platform-browser": "^16.2.3",
     "@angular/platform-browser-dynamic": "^16.2.3",
     "@angular/platform-server": "^16.2.3",
@@ -50,6 +52,5 @@
   "overrides": {
     "autoprefixer": "10.4.5",
     "webpack": "5.81.0"
-  },
-  "optionalDependencies": {}
+  }
 }

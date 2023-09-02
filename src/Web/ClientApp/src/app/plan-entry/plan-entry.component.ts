@@ -13,6 +13,8 @@ export class PlanEntryComponent {
 
   public planTypes: PlanType[];
 
+  public hide: boolean = true;
+
   constructor(formBuilder: FormBuilder) {
     this.#formBuilder = formBuilder;
     this.planTypes = [
@@ -29,6 +31,14 @@ export class PlanEntryComponent {
 
   public onSubmit(): void {
     console.log(this.planForm.value);
+  }
+
+  public setRepeatOnDate(e: any) {
+    const convertDate = new Date(e.target.value).toISOString().substring(0, 10);
+
+    this.planForm.get('repeatOnDate')?.setValue(convertDate, {
+      onlyself: true,
+    });
   }
 
   private createPlanForm(): FormGroup {

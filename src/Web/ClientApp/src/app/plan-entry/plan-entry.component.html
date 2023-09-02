@@ -1,28 +1,29 @@
-<form [formGroup]="planForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="planForm" (ngSubmit)="onSubmit()" class="plan-form-container plan-form-fields">
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="planType">
+      <mat-option [value]="planType" *ngFor="let planType of planTypes">
+        {{ planType.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div class="row">
-    <div class="form-group col-md-6">
-      <label class="form-label" for="planType">Type:</label>
-      <select class="form-control" if="planType" formControlName="planType">
-        <option *ngFor="let planType of planTypes" [ngValue]="planType">
-          {{ planType.name }}
-        </option>
-      </select>
-    </div>
-  </div>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Amount" formControlName="amount" />
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
 
-  <div class="row">
-    <div class="form-group col-md-6">
-      <label class="form-label" for="amount">Amount: </label>
-      <input class="form-control" id="amount" type="text" formControlName="amount" />
-    </div>
+  <mat-form-field *ngIf="hasRepeatOnDate()">
+    <input matInput
+            readonly
+            [matDatepicker]="picker"
+            placeholder="Repeat On"
+            formControlName="repeatOnDate"
+            (dateChange)="setRepeatOnDate($event)" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
-    <div class="form-group col-md-6">
-      <label class="form-label" for="repeatOnDate">Repeat On: </label>
-      <input class="form-control" id="repeatOnDate" type="text" ngbDatepicker formControlName="repeatOnDate" />
-    </div>
-  </div>
-
-  <p></p>
-  <button class="btn btn-primary" type="submit" [disabled]="!planForm.valid">Submit</button>
+  
+  <button mat-raised-button color="primary" type="submit" [disabled]="!planForm.valid">Submit</button>
 </form>
