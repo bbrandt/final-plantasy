@@ -30,6 +30,6 @@ import { BoundDialogComponent } from './dialogs/bound-dialog.component';
     ])
   ],
   exports: [SetupComponent, RouterModule],
-  providers: [PlanEntryService]
+  providers: []
 })
 export class PlanningModule { }

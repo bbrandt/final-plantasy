@@ -4,7 +4,9 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { PlanEntryModel } from "./../model/plan-entry.model";
 import { UrlBuilderService } from "./../../services/url-builder.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PlanEntryService {
   readonly #httpClient: HttpClient;
   readonly #urlBuilder: UrlBuilderService;

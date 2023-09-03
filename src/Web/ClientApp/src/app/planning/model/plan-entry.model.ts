@@ -1,5 +1,5 @@
 export interface PlanEntryModel {
   eventDate: string;
-  planType: string;
+  planType: number;
   amount: number;
 }
