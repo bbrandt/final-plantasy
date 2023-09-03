@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UrlBuilderService {
   readonly #baseUrl: string;
