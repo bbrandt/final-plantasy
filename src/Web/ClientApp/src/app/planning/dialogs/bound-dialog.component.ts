@@ -2,6 +2,7 @@ import { Component, ComponentRef, OnInit, OnDestroy, ViewChild, Inject } from '@
 import { DialogBodyDirective } from './dialog-body.directive';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BoundDialogData } from './bound-dialog-data.interface';
+import { BoundDialogAction } from './bound-dialog-action.interface';
 
 @Component({
   selector: 'bound-dialog',
@@ -45,15 +46,17 @@ export class BoundDialogComponent implements OnInit, OnDestroy
     return this.#data.actions;
   }
 
-  public executeAction(action: any): void {
-    const shouldClose = action.callback.call(this.componentRef.instance);
+  public executeAction(action: BoundDialogAction): void {
+    const closeSubject = action.callback.call(this.componentRef.instance);
 
-    if (shouldClose) {
-      this.#dialogRef.close();
-    }
+    closeSubject.subscribe((canClose: boolean) => {
+      if (canClose) {
+        this.#dialogRef.close();
+      }
+    });
   }
 
-  public isActionDisabled(action: any): boolean {
+  public isActionDisabled(action: BoundDialogAction): boolean {
     if (!action.isDisabledCallback) {
       return false;
     }

@@ -1,5 +1,7 @@
+import { Subject } from 'rxjs';
+
 export interface BoundDialogAction {
     name: string;
-    callback: () => boolean;
+    callback: () => Subject<boolean>;
     isDisabledCallback?: () => boolean;
 }

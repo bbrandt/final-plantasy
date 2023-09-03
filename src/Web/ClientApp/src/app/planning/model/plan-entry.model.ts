@@ -1,5 +1,8 @@
+import { PlanType } from './plan-type.enum';
+
 export interface PlanEntryModel {
   eventDate: string;
-  planType: number;
+  planType: PlanType;
   amount: number;
 }
+

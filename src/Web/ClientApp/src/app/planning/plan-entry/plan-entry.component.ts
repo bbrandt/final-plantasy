@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PlanType } from './../model/plan-type.enum';
+import { PlanTypeModel } from './../model/plan-type.model';
+import { PlanEntryService } from './../services/plan-entry.service';
+import { PlanEntryModel } from './../model/plan-entry.model';
 
 @Component({
   selector: 'plan-entry',
@@ -8,25 +13,27 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class PlanEntryComponent {
   #formBuilder: FormBuilder;
+  #planEntryService: PlanEntryService;
 
   public planForm: FormGroup<FormType>;
 
-  public planTypes: PlanType[];
+  public planTypes: PlanTypeModel[];
 
   public hide: boolean = true;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(
+    formBuilder: FormBuilder,
+    planEntryService: PlanEntryService)
+  {
     this.#formBuilder = formBuilder;
+    this.#planEntryService = planEntryService;
+
     this.planTypes = [
-      { id: 0, name: "Credit" },
-      { id: 1, name: "Debit" }
+      { id: PlanType.Credit, name: "Credit" },
+      { id: PlanType.Debit, name: "Debit" }
     ];
 
     this.planForm = this.createPlanForm();
-  }
-
-  public onSubmit(): void {
-    console.log(this.planForm.value);
   }
 
   public setEventDate(e: any) {
@@ -37,12 +44,31 @@ export class PlanEntryComponent {
     });
   }
 
-  public onCancelClick(): boolean {
-    return true;
+  public onCancelClick(): Subject<boolean> {
+    const subject = new Subject<boolean>();
+
+    // do async call
+
+    return subject;
   }
 
-  public onSaveClick(): boolean {
-    return true;
+  public onSaveClick(): Subject<boolean> {
+    const subject = new Subject<boolean>();
+
+    const model: PlanEntryModel = {
+      amount: this.planForm.value.amount!,
+      eventDate: this.planForm.value.eventDate!,
+      planType: this.planForm.value.planType?.id!
+    };
+
+    this.#planEntryService.addOrUpdatePlan(model)
+      .subscribe((response) => {
+        console.log(response);
+
+        subject.next(false);
+      });
+
+    return subject;
   }
 
   public isSaveDisabled(): boolean {
@@ -58,13 +84,8 @@ export class PlanEntryComponent {
   }
 }
 
-interface PlanType {
-  id: number,
-  name: string
-}
-
 interface FormType {
-  planType: FormControl<PlanType | null>,
+  planType: FormControl<PlanTypeModel | null>,
   amount: FormControl<number | null>,
   eventDate: FormControl<string | null>
 }

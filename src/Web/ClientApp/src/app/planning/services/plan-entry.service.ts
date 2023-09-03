@@ -35,9 +35,15 @@ export class PlanEntryService {
       params: httpParams
     };
 
-    const url = this.#urlBuilder.build("api/planentry");
+    const url = this.#urlBuilder.build("api/plan-entry/list");
 
     return this.#httpClient
       .get<PlanEntryModel[]>(url, params);
+  }
+
+  public addOrUpdatePlan(model: PlanEntryModel) {
+    const url = this.#urlBuilder.build("api/plan-entry/add-or-update");
+
+    return this.#httpClient.post<PlanEntryModel>(url, model);
   }
 }
