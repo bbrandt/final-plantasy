@@ -8,22 +8,19 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Amount" formControlName="amount" />
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-
-  <mat-form-field *ngIf="hasRepeatOnDate()">
+  <mat-form-field>
     <input matInput
-            readonly
-            [matDatepicker]="picker"
-            placeholder="Repeat On"
-            formControlName="repeatOnDate"
-            (dateChange)="setRepeatOnDate($event)" />
+           readonly
+           [matDatepicker]="picker"
+           placeholder="Event Date"
+           formControlName="eventDate"
+           (dateChange)="setEventDate($event)" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  
-  <button mat-raised-button color="primary" type="submit" [disabled]="!planForm.valid">Submit</button>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Amount" formControlName="amount" />
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
 </form>

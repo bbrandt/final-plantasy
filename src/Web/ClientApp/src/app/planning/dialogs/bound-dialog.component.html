@@ -1,0 +1,13 @@
+<div>
+  <h1 mat-dialog-title *ngIf="title()">{{ title() }}</h1>
+
+  <div class="bound-body">
+    <ng-container dialogBody></ng-container>
+  </div>
+
+  <mat-dialog-actions *ngIf="hasActions()">
+    <div *ngFor="let action of getActions()">
+      <button mat-button (click)="executeAction(action)" [disabled]="isActionDisabled(action)">{{ action.name }}</button>
+    </div>
+  </mat-dialog-actions>
+</div>

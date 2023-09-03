@@ -25,27 +25,35 @@ export class PlanEntryComponent {
     this.planForm = this.createPlanForm();
   }
 
-  public hasRepeatOnDate(): boolean {
-    return this.planForm.value.planType?.id == 1;
-  }
-
   public onSubmit(): void {
     console.log(this.planForm.value);
   }
 
-  public setRepeatOnDate(e: any) {
+  public setEventDate(e: any) {
     const convertDate = new Date(e.target.value).toISOString().substring(0, 10);
 
-    this.planForm.get('repeatOnDate')?.setValue(convertDate, {
+    this.planForm.get('eventDate')?.setValue(convertDate, {
       onlyself: true,
     });
+  }
+
+  public onCancelClick(): boolean {
+    return true;
+  }
+
+  public onSaveClick(): boolean {
+    return true;
+  }
+
+  public isSaveDisabled(): boolean {
+    return !this.planForm.valid;
   }
 
   private createPlanForm(): FormGroup {
     return this.#formBuilder.group({
       planType: [null, Validators.required],
       amount: [null, Validators.required],
-      repeatOnDate: [null]
+      eventDate: [null, Validators.required]
     });
   }
 }
@@ -58,5 +66,5 @@ interface PlanType {
 interface FormType {
   planType: FormControl<PlanType | null>,
   amount: FormControl<number | null>,
-  repeatOnDate: FormControl<string | null>
+  eventDate: FormControl<string | null>
 }
