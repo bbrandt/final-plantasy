@@ -1,19 +1,20 @@
 import { Observable } from "rxjs";
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { PlanEntryModel } from "./../model/plan-entry.model";
+import { UrlBuilderService } from "./../../services/url-builder.service";
 
 @Injectable()
 export class PlanEntryService {
   readonly #httpClient: HttpClient;
-  readonly #baseUrl: string;
+  readonly #urlBuilder: UrlBuilderService;
 
   constructor(
     httpClient: HttpClient,
-    @Inject('BASE_URL') baseUrl: string)
+    urlBuilder: UrlBuilderService)
   {
     this.#httpClient = httpClient;
-    this.#baseUrl = baseUrl;
+    this.#urlBuilder = urlBuilder;
   }
 
   public findPlans(
@@ -32,7 +33,9 @@ export class PlanEntryService {
       params: httpParams
     };
 
+    const url = this.#urlBuilder.build("api/planentry");
+
     return this.#httpClient
-      .get<PlanEntryModel[]>(this.#baseUrl + 'api/planentry', params);
+      .get<PlanEntryModel[]>(url, params);
   }
 }
