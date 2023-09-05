@@ -8,8 +8,4 @@
     <RootNamespace>TRS.FinalPlantasy.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Planning\" />
-  </ItemGroup>
-
 </Project>

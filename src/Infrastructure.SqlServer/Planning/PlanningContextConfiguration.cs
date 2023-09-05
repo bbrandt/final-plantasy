@@ -4,11 +4,11 @@ using TRS.FinalPlantasy.Application.Abstractions.Options;
 
 namespace TRS.FinalPlantasy.Infrastructure.SqlServer.Planning;
 
-internal class PlanContextConfiguration
+internal class PlanningContextConfiguration
 {
     private readonly IOptionsSnapshot<PlanningOptions> _options;
 
-    public PlanContextConfiguration(IOptionsSnapshot<PlanningOptions> options)
+    public PlanningContextConfiguration(IOptionsSnapshot<PlanningOptions> options)
     {
         _options = options;
     }

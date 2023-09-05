@@ -8,9 +8,11 @@ public class Migration_20230905200000_AddPlanEntryTable : ForwardMigration
 {
     public override void Up()
     {
+        Create.Schema(Schemas.Planning);
+
         const string Table = "PlanEntry";
 
-        Create.Table(Table)
+        Create.Table(Table).InSchema(Schemas.Planning)
             .WithColumn("Id").AsInt32().PrimaryKey().Identity()
             .WithColumn("PlanType").AsInt32().NotNullable()
             .WithColumn("EventDate").AsDateTime2().NotNullable()

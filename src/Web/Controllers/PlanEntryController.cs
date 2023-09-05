@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using TRS.FinalPlantasy.Application.Abstractions.Planning;
+using TRS.FinalPlantasy.Application.Abstractions.Planning.Commands;
+using TRS.FinalPlantasy.Application.Abstractions.Validations;
 
 namespace TRS.FinalPlantasy.Web.Controllers;
 
@@ -6,46 +10,31 @@ namespace TRS.FinalPlantasy.Web.Controllers;
 [Route("/api/plan-entry")]
 public class PlanEntryController : ControllerBase
 {
-    private readonly ILogger<PlanEntryController> _logger;
+    private readonly IMediator _mediator;
 
-    public PlanEntryController(ILogger<PlanEntryController> logger)
+    public PlanEntryController(IMediator mediator)
     {
-        _logger = logger;
+        _mediator = mediator;
     }
 
     [HttpGet]
     [Route("/api/plan-entry/list")]
-    public IEnumerable<PlanEntry> Get()
+    public IEnumerable<PlanEntryModel> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new PlanEntry
-        {
-            Id = index,
-            EventDate = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Amount = Random.Shared.Next(-20, 55)                
-        })
-        .ToArray();
+        
     }
 
     [HttpPost]
     [Route("/api/plan-entry/add-or-update")]
-    public async Task<Response> AddOrUpdate(PlanEntry model)
+    public async Task<ResultResponse<int?>> AddOrUpdate(PlanEntryModel model)
     {
-        await Task.Delay(0);
+        var command = new NewPlanEntryCommand 
+        { 
+            Model = model
+        };
 
-        return new Response { Message = "TESTING" };
+        var response = await _mediator.Send(command);
+
+        return response;
     }
-}
-
-public class Response
-{ 
-    public string Message { get; set; }
-}
-
-public class ValidationMessage
-{
-
-}
-
-public enum ValidationType
-{ 
 }

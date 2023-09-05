@@ -3,15 +3,15 @@
 public class PlanEntry
 {
     public PlanEntry(
-        int id,
         PlanType planType,
+        DateOnly eventDate,
         double amount,
-        DateOnly eventDate)
+        PlanRepeatOn? repeatOn)
     {
-        Id = id;
         PlanType = planType;
-        Amount = amount;
         EventDate = eventDate;
+        Amount = amount;
+        RepeatOn = repeatOn;
     }
 
     public int Id { get; protected set; }
@@ -21,4 +21,6 @@ public class PlanEntry
     public double Amount { get; protected set; }
 
     public DateOnly EventDate { get; protected set; }
+
+    public PlanRepeatOn? RepeatOn { get; protected set; }
 }

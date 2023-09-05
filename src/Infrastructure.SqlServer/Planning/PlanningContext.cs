@@ -2,14 +2,14 @@
 
 namespace TRS.FinalPlantasy.Infrastructure.SqlServer.Planning;
 
-internal class PlanContext : DbContext
+internal class PlanningContext : DbContext
 {
-    private readonly PlanContextConfiguration _configuration;
-    private readonly PlanContextModelBuilder _modelBuilder;
+    private readonly PlanningContextConfiguration _configuration;
+    private readonly PlanningContextModelBuilder _modelBuilder;
 
-    public PlanContext(
-        PlanContextConfiguration configuration,
-        PlanContextModelBuilder modelBuilder)
+    public PlanningContext(
+        PlanningContextConfiguration configuration,
+        PlanningContextModelBuilder modelBuilder)
     {
         _configuration = configuration;
         _modelBuilder = modelBuilder;
