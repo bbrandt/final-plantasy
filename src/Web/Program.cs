@@ -1,30 +1,67 @@
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
+using TRS.FinalPlantasy.Application.Abstractions.Infrastructure;
+using TRS.FinalPlantasy.Web.Infrastructure;
 
-// Add services to the container.
+Log.Logger = StartupLoggerCreator.Create();
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddSwaggerGen();
+// Will be replaced during application construction so get ahold of it now
+var startupLogger = Log.Logger;
 
-var app = builder.Build();
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+try
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    startupLogger.Information("Starting up!");
+
+    var builder = ApplicationWebApplicationBuilderCreator.Create(args, startupLogger);
+
+    var app = ApplicationWebApplicationBuilder.Build(builder, startupLogger);
+
+    await RunApplicationAsync(app, startupLogger);
+
+    return 0;
+}
+catch (Exception e)
+{
+    startupLogger.Fatal(e, "Startup failed");
+    
+    return 1;
+}
+finally 
+{
+    startupLogger.Information("Closing");
+
+    Log.CloseAndFlush();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
+static async Task RunApplicationAsync(WebApplication app, Serilog.ILogger logger)
+{
+    LogApplicationId(app.Services, logger);
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    var cts = ConfigureCancellation(logger);
 
-app.MapFallbackToFile("index.html");
+    logger.Information("Running Application - Press CTRL+C to end");
 
-app.Run();
+    await app.RunAsync(cts.Token);
+}
+
+static void LogApplicationId(IServiceProvider services, Serilog.ILogger logger)
+{
+    var appIdProvider = services.GetRequiredService<IApplicationIdProvider>();
+
+    logger.Information("Running with application id {ApplicationId}", appIdProvider.GetId());
+}
+
+static CancellationTokenSource ConfigureCancellation(Serilog.ILogger logger)
+{
+    var cts = new CancellationTokenSource();
+
+    Console.CancelKeyPress += (s, e) => 
+    {
+        logger.Information("Cancelling...");
+
+        cts.Cancel();
+
+        e.Cancel = true;
+    };
+
+    return cts;
+}
