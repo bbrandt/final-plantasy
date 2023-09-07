@@ -25,3 +25,5 @@ internal class PlanningContextConfiguration
         optionsBuilder.UseSqlServer(connectionString);
     }
 }
+
+

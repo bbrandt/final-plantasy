@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
@@ -24,15 +25,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Testcontainers.MsSql" Version="3.4.0" />
+    <PackageReference Include="Verify.NUnit" Version="21.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Integration\" />
     <Folder Include="Unit\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Abstractions\Application.Abstractions.csproj" />
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\DatabaseMigrator\DatabaseMigrator.csproj" />
     <ProjectReference Include="..\Infrastructure.SqlServer\Infrastructure.SqlServer.csproj" />
   </ItemGroup>
 

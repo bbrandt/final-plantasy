@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TRS.FinalPlantasy.Application.Abstractions.Planning;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Commands;
+using TRS.FinalPlantasy.Application.Abstractions.Planning.Queries;
 using TRS.FinalPlantasy.Application.Abstractions.Validations;
 
 namespace TRS.FinalPlantasy.Web.Controllers;
@@ -19,9 +20,13 @@ public class PlanEntryController : ControllerBase
 
     [HttpGet]
     [Route("/api/plan-entry/list")]
-    public IEnumerable<PlanEntryModel> Get()
+    public async Task<IEnumerable<PlanEntryModel>> Get()
     {
-        
+        var query = new ListPlanEntryQuery();
+
+        var models = await _mediator.Send(query);
+
+        return models;
     }
 
     [HttpPost]

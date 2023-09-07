@@ -28,4 +28,11 @@ internal class PlanningContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+    {
+        builder.Properties<DateOnly>()
+            .HaveConversion<DateOnlyConverter>()
+            .HaveColumnType("date");
+    }
 }

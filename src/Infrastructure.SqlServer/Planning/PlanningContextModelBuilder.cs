@@ -18,8 +18,7 @@ internal class PlanningContextModelBuilder
         var mapping = modelBuilder.Entity<PlanEntry>();
 
         mapping.Property(x => x.Id)
-            .UseIdentityColumn()
-            .ValueGeneratedNever();
+            .ValueGeneratedOnAdd();
 
         mapping.HasKey(x => x.Id);
     }

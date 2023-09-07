@@ -7,7 +7,7 @@ using TRS.FinalPlantasy.DatabaseMigrator.Options;
 
 namespace TRS.FinalPlantasy.DatabaseMigrator.Application;
 
-internal class DatabaseMigrationRunner
+public class DatabaseMigrationRunner
 {
     public async Task RunAsync(MigratorOptions options, CancellationToken cancellationToken)
     {

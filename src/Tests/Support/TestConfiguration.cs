@@ -1,3 +1,3 @@
 ﻿namespace TRS.FinalPlantasy.Tests.Support;
 
-internal record TestConfiguration(string Key, string? Value);
+public record TestConfiguration(string Key, string? Value);

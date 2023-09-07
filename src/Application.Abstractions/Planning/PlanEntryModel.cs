@@ -4,6 +4,8 @@ namespace TRS.FinalPlantasy.Application.Abstractions.Planning;
 
 public class PlanEntryModel
 {
+    public int? Id { get; set; }
+
     public PlanType? PlanType { get; set; }
 
     public DateOnly? EventDate { get; set; }

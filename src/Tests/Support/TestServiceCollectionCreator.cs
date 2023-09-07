@@ -15,6 +15,8 @@ internal static class TestServiceCollectionCreator
         services.AddApplication(configuration);
         services.AddSqlServerPersistence();
 
+        services.AddLogging();
+
         return services;
     }
 }
