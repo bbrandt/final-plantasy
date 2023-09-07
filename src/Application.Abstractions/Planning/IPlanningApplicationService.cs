@@ -2,7 +2,7 @@
 
 namespace TRS.FinalPlantasy.Application.Abstractions.Planning;
 
-public interface IPlanEntryApplicationService
+public interface IPlanningApplicationService
 {
     /// <summary>
     /// Add a new plan entry. The application service is the direct client of the domain.

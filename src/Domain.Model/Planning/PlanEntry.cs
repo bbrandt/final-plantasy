@@ -2,7 +2,7 @@
 
 public class PlanEntry
 {
-    public PlanEntry(
+    protected PlanEntry(
         PlanType planType,
         DateOnly eventDate,
         double amount,
@@ -12,6 +12,28 @@ public class PlanEntry
         EventDate = eventDate;
         Amount = amount;
         RepeatOn = repeatOn;
+    }
+
+    public static PlanEntry NewEntry(
+        PlanType planType,
+        DateOnly eventDate,
+        double amount,
+        PlanRepeatOn? repeatOn)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(amount));
+        }
+
+        if (eventDate == DateOnly.MinValue || eventDate == DateOnly.MaxValue)
+        {
+            throw new ArgumentOutOfRangeException(nameof(eventDate));
+        }
+
+        return new PlanEntry(
+            planType, 
+            eventDate, 
+            amount, repeatOn);
     }
 
     public int Id { get; protected set; }

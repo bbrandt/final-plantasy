@@ -8,11 +8,11 @@ namespace TRS.FinalPlantasy.Application.Planning.Commands;
 
 internal class NewPlanEntryCommandHandler : IRequestHandler<NewPlanEntryCommand, ResultResponse<int?>>
 {
-    private readonly IPlanEntryApplicationService _applicationService;
+    private readonly IPlanningApplicationService _applicationService;
     private readonly ILogger<NewPlanEntryCommandHandler> _logger;
 
     public NewPlanEntryCommandHandler(
-        IPlanEntryApplicationService applicationService,
+        IPlanningApplicationService applicationService,
          ILogger<NewPlanEntryCommandHandler> logger)
     {
         _applicationService = applicationService;

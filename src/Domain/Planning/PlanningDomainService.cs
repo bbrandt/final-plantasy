@@ -2,7 +2,7 @@
 
 namespace TRS.FinalPlantasy.Domain.Planning;
 
-public class PlanEntryDomainService
+public class PlanningDomainService
 {
     /// <summary>
     /// Create a new plant entry entity
@@ -15,13 +15,13 @@ public class PlanEntryDomainService
     /*
      * This domain is a little anemic but so far it does not have much behavior.
      */
-    public PlanEntry Create(
+    public PlanEntry CreatePlanEntry(
         PlanType planType,
         DateOnly eventDate,
         double amount,
         PlanRepeatOn? repeatOn)
     {
-        return new PlanEntry(
+        return PlanEntry.NewEntry(
             planType,
             eventDate,
             amount,

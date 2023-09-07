@@ -8,16 +8,16 @@ using TRS.FinalPlantasy.Domain.Planning;
 
 namespace TRS.FinalPlantasy.Application.Planning;
 
-internal class PlanEntryApplicationService : IPlanEntryApplicationService
+internal class PlanningApplicationService : IPlanningApplicationService
 {
     private readonly IValidator<PlanEntryModel> _validator;
     private readonly IPlanEntryUnitOfWorkFactory _unitOfWorkFactory;
-    private readonly PlanEntryDomainService _domainService;
+    private readonly PlanningDomainService _domainService;
 
-    public PlanEntryApplicationService(
+    public PlanningApplicationService(
         IValidator<PlanEntryModel> validator,
         IPlanEntryUnitOfWorkFactory unitOfWorkFactory,
-        PlanEntryDomainService domainService)
+        PlanningDomainService domainService)
     {
         _validator = validator;
         _unitOfWorkFactory = unitOfWorkFactory;
@@ -33,7 +33,7 @@ internal class PlanEntryApplicationService : IPlanEntryApplicationService
             return response;
         }
 
-        var entity = _domainService.Create(
+        var entity = _domainService.CreatePlanEntry(
             model.PlanType!.Value, 
             model.EventDate!.Value, 
             model.Amount!.Value, 

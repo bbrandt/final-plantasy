@@ -7,7 +7,7 @@ public static class ServicesExtensions
 {
     public static IServiceCollection AddPlanningDomain(this IServiceCollection services)
     {
-        services.AddTransient<PlanEntryDomainService>();
+        services.AddTransient<PlanningDomainService>();
 
         return services;
     }
