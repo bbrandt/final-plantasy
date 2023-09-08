@@ -1,8 +1,9 @@
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { PlanEntryModel } from "./../model/plan-entry.model";
-import { UrlBuilderService } from "./../../services/url-builder.service";
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { PlanEntryModel } from './../model/plan-entry.model';
+import { UrlBuilderService } from './../../services/url-builder.service';
+import { ResultResponse } from './../model/result-response';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +42,9 @@ export class PlanEntryService {
       .get<PlanEntryModel[]>(url, params);
   }
 
-  public addOrUpdatePlan(model: PlanEntryModel) {
+  public addOrUpdatePlan(model: PlanEntryModel): Observable<ResultResponse<number | null>> {
     const url = this.#urlBuilder.build("api/plan-entry/add-or-update");
 
-    return this.#httpClient.post<PlanEntryModel>(url, model);
+    return this.#httpClient.post<ResultResponse<number | null>>(url, model);
   }
 }

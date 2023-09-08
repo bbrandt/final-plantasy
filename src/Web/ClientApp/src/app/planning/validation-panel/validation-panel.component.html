@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>error_outline</mat-icon>
+      Please correct the following issues
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul *ngFor="let message of getErrorMessages()">
+      <li>{{ message.message }}</li>
+    </ul>
+  </mat-card-content>
+</mat-card>

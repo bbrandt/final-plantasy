@@ -8,15 +8,16 @@ import { AngularMaterialModule } from './../material.module';
 import { SetupComponent } from './setup/setup.component';
 import { PlanEntryComponent } from './plan-entry/plan-entry.component';
 import { PlanListComponent } from './plan-list/plan-list.component';
-import { PlanEntryService } from './services/plan-entry.service';
 import { DialogBodyDirective } from './dialogs/dialog-body.directive';
 import { BoundDialogComponent } from './dialogs/bound-dialog.component';
+import { ValidationPanelComponent } from './validation-panel/validation-panel.component';
 
 @NgModule({
   declarations: [
     SetupComponent,
     PlanEntryComponent,
     PlanListComponent,
+    ValidationPanelComponent,
     BoundDialogComponent,
     DialogBodyDirective
   ],

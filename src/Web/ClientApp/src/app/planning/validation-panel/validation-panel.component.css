@@ -1,0 +1,13 @@
+mat-card {
+  border: 2px solid #f5c2c7;
+  color: #842029;
+  background-color: #f8d7da;
+}
+
+mat-card-header mat-icon {
+  vertical-align: middle;
+}
+
+mat-card-content {
+  margin-top: 5px;
+}

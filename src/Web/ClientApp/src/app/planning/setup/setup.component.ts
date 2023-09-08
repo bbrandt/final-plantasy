@@ -29,7 +29,8 @@ export class SetupComponent {
           {
             name: "Save",
             callback: PlanEntryComponent.prototype.onSaveClick,
-            isDisabledCallback: PlanEntryComponent.prototype.isSaveDisabled
+            isDisabledCallback: PlanEntryComponent.prototype.isSaveDisabled,
+            color: "primary"
           }
         ]
       }

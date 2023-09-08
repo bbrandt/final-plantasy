@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PlanType } from './../model/plan-type.enum';
 import { PlanTypeModel } from './../model/plan-type.model';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
+import { ValidationMessage } from './../model/validation-message';
+import { ResultResponse } from './../model/result-response';
 
 @Component({
   selector: 'plan-entry',
@@ -14,12 +16,15 @@ import { PlanEntryModel } from './../model/plan-entry.model';
 export class PlanEntryComponent {
   #formBuilder: FormBuilder;
   #planEntryService: PlanEntryService;
+  #isSaving: BehaviorSubject<boolean>;
 
   public planForm: FormGroup<FormType>;
 
   public planTypes: PlanTypeModel[];
 
-  public hide: boolean = true;
+  public isSaving$: Observable<boolean>;
+
+  public validationMessages: ValidationMessage[];
 
   constructor(
     formBuilder: FormBuilder,
@@ -27,6 +32,9 @@ export class PlanEntryComponent {
   {
     this.#formBuilder = formBuilder;
     this.#planEntryService = planEntryService;
+    this.#isSaving = new BehaviorSubject<boolean>(false);
+    this.isSaving$ = this.#isSaving.asObservable();
+    this.validationMessages = [];
 
     this.planTypes = [
       { id: PlanType.Credit, name: "Credit" },
@@ -45,7 +53,7 @@ export class PlanEntryComponent {
   }
 
   public onCancelClick(): Subject<boolean> {
-    const subject = new Subject<boolean>();
+    const subject = new BehaviorSubject<boolean>(true);
 
     // do async call
 
@@ -53,6 +61,8 @@ export class PlanEntryComponent {
   }
 
   public onSaveClick(): Subject<boolean> {
+    this.#isSaving.next(true);
+
     const subject = new Subject<boolean>();
 
     const model: PlanEntryModel = {
@@ -63,7 +73,9 @@ export class PlanEntryComponent {
 
     this.#planEntryService.addOrUpdatePlan(model)
       .subscribe((response) => {
-        console.log(response);
+        this.validationMessages = response.messages;
+
+        this.#isSaving.next(false);
 
         subject.next(false);
       });
@@ -73,6 +85,10 @@ export class PlanEntryComponent {
 
   public isSaveDisabled(): boolean {
     return !this.planForm.valid;
+  }
+
+  public hasValidations(): boolean {
+    return this.validationMessages.length > 0;
   }
 
   private createPlanForm(): FormGroup {

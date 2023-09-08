@@ -7,7 +7,12 @@
 
   <mat-dialog-actions *ngIf="hasActions()">
     <div *ngFor="let action of getActions()">
-      <button mat-button (click)="executeAction(action)" [disabled]="isActionDisabled(action)">{{ action.name }}</button>
+      <button class="dialog-button" mat-raised-button [color]="getActionColor(action)" (click)="executeAction(action)" [disabled]="isActionDisabled(action)">
+        {{ action.name }}
+      </button>
     </div>
+    <mat-icon class="action-icon" *ngIf="isBusy$ | async">
+      <mat-spinner diameter="20"> </mat-spinner>
+    </mat-icon>
   </mat-dialog-actions>
 </div>

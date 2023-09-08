@@ -1,26 +1,32 @@
-<form [formGroup]="planForm" class="plan-form-container plan-form-fields">
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <mat-select formControlName="planType">
-      <mat-option [value]="planType" *ngFor="let planType of planTypes">
-        {{ planType.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div *ngIf="hasValidations()">
+  <validation-panel [messages]="validationMessages"></validation-panel>
+</div>
 
-  <mat-form-field>
-    <input matInput
-           readonly
-           [matDatepicker]="picker"
-           placeholder="Event Date"
-           formControlName="eventDate"
-           (dateChange)="setEventDate($event)" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<div>
+  <form [formGroup]="planForm" class="plan-form-container plan-form-fields">
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="planType">
+        <mat-option [value]="planType" *ngFor="let planType of planTypes">
+          {{ planType.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Amount" formControlName="amount" />
-    <mat-icon matSuffix>attach_money</mat-icon>
-  </mat-form-field>
-</form>
+    <mat-form-field>
+      <input matInput
+             readonly
+             [matDatepicker]="picker"
+             placeholder="Event Date"
+             formControlName="eventDate"
+             (dateChange)="setEventDate($event)" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Amount" formControlName="amount" />
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+  </form>
+</div>

@@ -8,13 +8,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-form {
-  width: 420px;
-  margin: 35px auto 100px;
-  display: block;
-  float: none;
-}
-
 .mat-form-field {
   width: 100%;
 }
@@ -23,9 +16,9 @@ form {
   margin: 8px 0 20px;
 }
 
-  .misc-bottom-padding mat-label {
-    margin-right: 15px;
-  }
+.misc-bottom-padding mat-label {
+  margin-right: 15px;
+}
 
 .mat-radio-label {
   margin: 0 15px 0 0;
