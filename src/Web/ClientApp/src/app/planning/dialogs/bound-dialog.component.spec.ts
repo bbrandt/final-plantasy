@@ -1,6 +1,10 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { DialogBodyDirective } from './dialog-body.directive';
 import { BoundDialogComponent } from './bound-dialog.component';
+import { AngularMaterialModule } from './../../material.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('BoundDialogComponent', () => {
   let component: BoundDialogComponent;
@@ -9,7 +13,16 @@ describe('BoundDialogComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule(
       {
-        declarations: [BoundDialogComponent]
+        imports: [AngularMaterialModule],
+        declarations: [DialogBodyDirective, BoundDialogComponent],
+        providers: [
+          {
+            provide: MAT_DIALOG_DATA, useValue: {
+              boundComponent: TestComponentBody
+            }
+          },
+          { provide: MatDialogRef, useValue: {} }
+        ]
       })
       .compileComponents();
   }));
@@ -24,3 +37,13 @@ describe('BoundDialogComponent', () => {
     expect(component).toBeDefined();
   });
 });
+
+
+@Component({
+  template: 'I am a test!',
+  selector: 'test'
+})
+class TestComponentBody {
+  constructor() {
+  }
+}

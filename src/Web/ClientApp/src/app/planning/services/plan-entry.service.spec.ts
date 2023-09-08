@@ -36,7 +36,7 @@ describe("PlanEntryService", () => {
     });
 
     const testRequest = httpTestingController
-      .expectOne('TEST_BASE_URL/api/planentry?filter=&sortOrder=asc&pageNumber=0&pageSize=3');
+      .expectOne('TEST_BASE_URL/api/plan-entry/list?filter=&sortOrder=asc&pageNumber=0&pageSize=3');
 
     expect(testRequest.request.method).toBe('GET');
 
