@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subject, BehaviorSubject, take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PlanType } from './../model/plan-type.enum';
 import { OptionModel } from './../model/option.model';
 import { PlanEntryService } from './../services/plan-entry.service';
+import { PlanOptionService } from './../services/plan-option.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { ValidationMessage } from './../model/validation-message';
 import { PlanRepeatOn } from '../model/plan-repeat-on.enum';
@@ -13,39 +13,44 @@ import { PlanRepeatOn } from '../model/plan-repeat-on.enum';
   templateUrl: './plan-entry.component.html',
   styleUrls: ['./plan-entry.component.css']
 })
-export class PlanEntryComponent {
-  #formBuilder: FormBuilder;
-  #planEntryService: PlanEntryService;
+export class PlanEntryComponent implements OnInit {
+  readonly #formBuilder: FormBuilder;
+  readonly #planEntryService: PlanEntryService;
+  readonly #planOptionService: PlanOptionService;
 
   public planForm: FormGroup<FormType>;
 
-  public planTypes: OptionModel[];
+  public planTypes!: OptionModel[];
 
-  public repeatOptions: OptionModel[];
+  public repeatOptions!: OptionModel[];
 
   public validationMessages: ValidationMessage[];
 
   constructor(
     formBuilder: FormBuilder,
-    planEntryService: PlanEntryService)
+    planEntryService: PlanEntryService,
+    planOptionService: PlanOptionService)
   {
     this.#formBuilder = formBuilder;
     this.#planEntryService = planEntryService;
+    this.#planOptionService = planOptionService;
     this.validationMessages = [];
 
-    this.planTypes = [
-      { id: PlanType.Credit, name: 'Credit' },
-      { id: PlanType.Debit, name: 'Debit' }
-    ];
-
-    this.repeatOptions = [
-      { id: PlanRepeatOn.None, name: 'None' },
-      { id: PlanRepeatOn.BiWeekly, name: 'Bi-Weekly' },
-      { id: PlanRepeatOn.Monthly, name: 'Monthly' },
-      { id: PlanRepeatOn.Yearly, name: 'Yearly' }
-    ];
-
     this.planForm = this.createPlanForm();
+  }
+
+  ngOnInit(): void {
+    this.#planOptionService.getPlanTypes()
+      .pipe(take(1))
+      .subscribe((options) => {
+        this.planTypes = options;
+      });
+
+    this.#planOptionService.getRepeatOns()
+      .pipe(take(1))
+      .subscribe((options) => {
+        this.repeatOptions = options;
+      });
   }
 
   public setEventDate(e: any) {
@@ -73,13 +78,17 @@ export class PlanEntryComponent {
       repeatOn: this.planForm.value.repeatOn?.id!
     };
 
-    const addOrUpdate = this.#planEntryService.addOrUpdatePlan(model)
+    this.#planEntryService.addOrUpdatePlan(model)
+      .pipe(take(1))
       .subscribe((response) => {
         this.validationMessages = response.messages;
 
-        subject.next(true);
+        if (this.validationMessages.length > 0) {
+          subject.next(false);
+          return;
+        }
 
-        addOrUpdate.unsubscribe();
+        subject.next(true);
       });
 
     return subject;

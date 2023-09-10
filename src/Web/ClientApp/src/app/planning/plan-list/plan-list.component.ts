@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, take } from 'rxjs';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanListDataSource } from './plan-list.datasource';
+import { PlanEntryModel } from './../model/plan-entry.model';
 
 @Component({
   selector: 'plan-list',
@@ -15,7 +16,7 @@ export class PlanListComponent implements OnInit, OnChanges {
   @Input()
   public refreshSubject!: Subject<boolean>;
 
-  public displayedColumns = ["id", "planType", "eventDate", "amount", "repeatOn", "description"];
+  public displayedColumns = ["actions", "planType", "eventDate", "amount", "repeatOn", "description"];
 
   constructor(planEntryService: PlanEntryService) {
     this.#planEntryService = planEntryService;
@@ -30,17 +31,23 @@ export class PlanListComponent implements OnInit, OnChanges {
     this.dataSource.loadPlanEntries();
   }
 
-  public onRowClicked(row: any) {
+  public editPlan(row: PlanEntryModel) {
+    console.log(row);
+  }
+
+  public deletePlan(row: PlanEntryModel) {
     console.log(row);
   }
 
   private checkRefreshSubject(): void {
-    this.refreshSubject.subscribe((shouldRefresh) => {
-      if (shouldRefresh) {
-        this.dataSource.loadPlanEntries();
+    const subscription$ = this.refreshSubject
+      .pipe(take(1))
+      .subscribe((shouldRefresh) => {
+        if (shouldRefresh) {
+          this.dataSource.loadPlanEntries();
 
-        this.refreshSubject.unsubscribe();
-      }
+          subscription$.unsubscribe();
+        }
     });
   }
 }

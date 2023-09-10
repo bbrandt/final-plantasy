@@ -1,7 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { PlanEntryService } from './../services/plan-entry.service';
-import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of, take } from 'rxjs';
 
 export class PlanListDataSource implements DataSource<PlanEntryModel> {
   readonly #planEntryService: PlanEntryService;
@@ -27,13 +27,14 @@ export class PlanListDataSource implements DataSource<PlanEntryModel> {
     filter: string = '',
     sortDirection: string = 'asc',
     pageIndex: number = 0,
-    pageSize: number = 3)
+    pageSize: number = 3): void
   {
     this.#loadingSubject.next(true);
 
     this.#planEntryService
       .findPlans(filter, sortDirection, pageIndex, pageSize)
       .pipe(
+        take(1),
         catchError(() => of([])),
         finalize(() => {
           this.#loadingSubject.next(false);

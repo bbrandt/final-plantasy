@@ -3,7 +3,7 @@ import { DialogBodyDirective } from './dialog-body.directive';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BoundDialogData } from './bound-dialog-data.interface';
 import { BoundDialogAction } from './bound-dialog-action.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 
 @Component({
   selector: 'bound-dialog',
@@ -60,16 +60,18 @@ export class BoundDialogComponent implements OnInit, OnDestroy
       action.onExecute(closeSubject);
     }
 
-    closeSubject.subscribe((canClose: boolean) => {
-      this.#isBusy.next(false);
+    closeSubject
+      .pipe(take(1))
+      .subscribe((canClose: boolean) => {
+        this.#isBusy.next(false);
 
-      if (canClose) {
-        this.#isBusy.complete();
-        this.#dialogRef.close();
-
-        closeSubject.unsubscribe();
-      }
-    });
+        if (canClose) {
+          this.#isBusy.complete();
+          this.#dialogRef.close();
+        } else {
+          this.#isBusy.next(false);
+        }
+      });
   }
 
   public isActionDisabled(action: BoundDialogAction): boolean {

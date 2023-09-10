@@ -1,7 +1,10 @@
 <mat-table class="mat-elevation-z8" [dataSource]="dataSource">
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-    <mat-cell *matCellDef="let plan">{{ plan.id }}</mat-cell>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let plan">
+      <button mat-icon-button><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button><mat-icon>delete</mat-icon></button>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="planType">
@@ -30,5 +33,5 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
