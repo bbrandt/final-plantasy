@@ -17,6 +17,7 @@ public class Migration_20230905200000_AddPlanEntryTable : ForwardMigration
             .WithColumn("PlanType").AsInt32().NotNullable()
             .WithColumn("EventDate").AsDateTime2().NotNullable()
             .WithColumn("Amount").AsDouble().NotNullable()
-            .WithColumn("RepeatOn").AsInt32().Nullable();
+            .WithColumn("Description").AsString(255).NotNullable()
+            .WithColumn("RepeatOn").AsInt32().NotNullable();
     }
 }

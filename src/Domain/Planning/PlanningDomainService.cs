@@ -19,12 +19,14 @@ public class PlanningDomainService
         PlanType planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn? repeatOn)
+        PlanRepeatOn repeatOn,
+        string description)
     {
         return PlanEntry.NewEntry(
             planType,
             eventDate,
             amount,
-            repeatOn);
+            repeatOn,
+            description);
     }
 }

@@ -33,11 +33,15 @@ internal class PlanningApplicationService : IPlanningApplicationService
             return response;
         }
 
+        /*
+         * Validator has ensured these values are not null
+         */
         var entity = _domainService.CreatePlanEntry(
             model.PlanType!.Value, 
             model.EventDate!.Value, 
             model.Amount!.Value, 
-            model.RepeatOn);
+            model.RepeatOn!.Value,
+            model.Description!);
 
         return await PersistEntityAsync(entity, cancellationToken);
     }

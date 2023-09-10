@@ -32,7 +32,8 @@ internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
             PlanType = PlanType.Credit,
             Amount = 1337.7,
             EventDate = new DateOnly(2023, 12, 12),
-            RepeatOn = PlanRepeatOn.Yearly
+            RepeatOn = PlanRepeatOn.Yearly,
+            Description = "Tuition"            
         };
 
         var command = new NewPlanEntryCommand 

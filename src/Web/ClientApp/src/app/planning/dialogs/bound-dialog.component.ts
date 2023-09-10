@@ -14,12 +14,12 @@ export class BoundDialogComponent implements OnInit, OnDestroy
 {
   @ViewChild(DialogBodyDirective, { static: true })
   public dialogBody!: DialogBodyDirective;
-  public componentRef!: ComponentRef<any>;
   public isBusy$: Observable<boolean>;
 
   readonly #data: BoundDialogData;
   readonly #dialogRef: MatDialogRef<BoundDialogComponent>
   readonly #isBusy: BehaviorSubject<boolean>;
+  #componentRef!: ComponentRef<any>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: BoundDialogData,
@@ -32,7 +32,7 @@ export class BoundDialogComponent implements OnInit, OnDestroy
   }
 
   public ngOnInit(): void {
-    this.componentRef = this.dialogBody.viewContainerRef.createComponent(this.#data.boundComponent);
+    this.#componentRef = this.dialogBody.viewContainerRef.createComponent(this.#data.boundComponent);
   }
 
   public ngOnDestroy(): void {
@@ -54,7 +54,11 @@ export class BoundDialogComponent implements OnInit, OnDestroy
   public executeAction(action: BoundDialogAction): void {
     this.#isBusy.next(true);
 
-    const closeSubject = action.callback.call(this.componentRef.instance);
+    const closeSubject = action.callback.call(this.#componentRef.instance);
+
+    if (action.onExecute) {
+      action.onExecute(closeSubject);
+    }
 
     closeSubject.subscribe((canClose: boolean) => {
       this.#isBusy.next(false);
@@ -62,6 +66,8 @@ export class BoundDialogComponent implements OnInit, OnDestroy
       if (canClose) {
         this.#isBusy.complete();
         this.#dialogRef.close();
+
+        closeSubject.unsubscribe();
       }
     });
   }
@@ -75,7 +81,7 @@ export class BoundDialogComponent implements OnInit, OnDestroy
       return false;
     }
 
-    const isDisabled = action.isDisabledCallback.call(this.componentRef.instance);
+    const isDisabled = action.isDisabledCallback.call(this.#componentRef.instance);
 
     return isDisabled;
   }

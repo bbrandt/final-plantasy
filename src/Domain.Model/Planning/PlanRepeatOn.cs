@@ -3,6 +3,7 @@
 public enum PlanRepeatOn
 { 
     None = 0,
-    Monthly = 1,
-    Yearly = 2
+    BiWeekly = 1,
+    Monthly = 2,
+    Yearly = 3
 }

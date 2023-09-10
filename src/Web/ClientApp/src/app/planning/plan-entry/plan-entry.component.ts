@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PlanType } from './../model/plan-type.enum';
-import { PlanTypeModel } from './../model/plan-type.model';
+import { OptionModel } from './../model/option.model';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { ValidationMessage } from './../model/validation-message';
-import { ResultResponse } from './../model/result-response';
+import { PlanRepeatOn } from '../model/plan-repeat-on.enum';
 
 @Component({
   selector: 'plan-entry',
@@ -16,13 +16,12 @@ import { ResultResponse } from './../model/result-response';
 export class PlanEntryComponent {
   #formBuilder: FormBuilder;
   #planEntryService: PlanEntryService;
-  #isSaving: BehaviorSubject<boolean>;
 
   public planForm: FormGroup<FormType>;
 
-  public planTypes: PlanTypeModel[];
+  public planTypes: OptionModel[];
 
-  public isSaving$: Observable<boolean>;
+  public repeatOptions: OptionModel[];
 
   public validationMessages: ValidationMessage[];
 
@@ -32,13 +31,18 @@ export class PlanEntryComponent {
   {
     this.#formBuilder = formBuilder;
     this.#planEntryService = planEntryService;
-    this.#isSaving = new BehaviorSubject<boolean>(false);
-    this.isSaving$ = this.#isSaving.asObservable();
     this.validationMessages = [];
 
     this.planTypes = [
-      { id: PlanType.Credit, name: "Credit" },
-      { id: PlanType.Debit, name: "Debit" }
+      { id: PlanType.Credit, name: 'Credit' },
+      { id: PlanType.Debit, name: 'Debit' }
+    ];
+
+    this.repeatOptions = [
+      { id: PlanRepeatOn.None, name: 'None' },
+      { id: PlanRepeatOn.BiWeekly, name: 'Bi-Weekly' },
+      { id: PlanRepeatOn.Monthly, name: 'Monthly' },
+      { id: PlanRepeatOn.Yearly, name: 'Yearly' }
     ];
 
     this.planForm = this.createPlanForm();
@@ -55,29 +59,27 @@ export class PlanEntryComponent {
   public onCancelClick(): Subject<boolean> {
     const subject = new BehaviorSubject<boolean>(true);
 
-    // do async call
-
     return subject;
   }
 
   public onSaveClick(): Subject<boolean> {
-    this.#isSaving.next(true);
-
     const subject = new Subject<boolean>();
 
     const model: PlanEntryModel = {
       amount: this.planForm.value.amount!,
       eventDate: this.planForm.value.eventDate!,
-      planType: this.planForm.value.planType?.id!
+      planType: this.planForm.value.planType?.id!,
+      description: this.planForm.value.description!,
+      repeatOn: this.planForm.value.repeatOn?.id!
     };
 
-    this.#planEntryService.addOrUpdatePlan(model)
+    const addOrUpdate = this.#planEntryService.addOrUpdatePlan(model)
       .subscribe((response) => {
         this.validationMessages = response.messages;
 
-        this.#isSaving.next(false);
+        subject.next(true);
 
-        subject.next(false);
+        addOrUpdate.unsubscribe();
       });
 
     return subject;
@@ -95,13 +97,17 @@ export class PlanEntryComponent {
     return this.#formBuilder.group({
       planType: [null, Validators.required],
       amount: [null, Validators.required],
-      eventDate: [null, Validators.required]
+      eventDate: [null, Validators.required],
+      description: [null, Validators.required],
+      repeatOn: [PlanRepeatOn.None, Validators.required]
     });
   }
 }
 
 interface FormType {
-  planType: FormControl<PlanTypeModel | null>,
+  planType: FormControl<OptionModel | null>,
   amount: FormControl<number | null>,
-  eventDate: FormControl<string | null>
+  eventDate: FormControl<string | null>,
+  description: FormControl<string | null>,
+  repeatOn: FormControl<OptionModel | null>
 }

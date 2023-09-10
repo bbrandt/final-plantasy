@@ -24,9 +24,23 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input matInput placeholder="Amount" formControlName="amount" />
       <mat-icon matSuffix>attach_money</mat-icon>
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Repeat On</mat-label>
+      <mat-select formControlName="repeatOn">
+        <mat-option [value]="repeatOn" *ngFor="let repeatOn of repeatOptions">
+          {{ repeatOn.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" />
+    </mat-form-field>
+
   </form>
 </div>

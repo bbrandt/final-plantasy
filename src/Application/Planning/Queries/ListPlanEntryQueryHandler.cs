@@ -24,7 +24,8 @@ internal class ListPlanEntryQueryHandler : IRequestHandler<ListPlanEntryQuery, I
                     PlanType = entry.PlanType,
                     EventDate = entry.EventDate,
                     Amount = entry.Amount,
-                    RepeatOn = entry.RepeatOn
+                    RepeatOn = entry.RepeatOn,
+                    Description = entry.Description
                 })
             .AsEnumerable();
 

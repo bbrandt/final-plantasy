@@ -6,19 +6,22 @@ public class PlanEntry
         PlanType planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn? repeatOn)
+        PlanRepeatOn repeatOn,
+        string description)
     {
         PlanType = planType;
         EventDate = eventDate;
         Amount = amount;
         RepeatOn = repeatOn;
+        Description = description;
     }
 
     public static PlanEntry NewEntry(
         PlanType planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn? repeatOn)
+        PlanRepeatOn repeatOn,
+        string description)
     {
         if (amount < 0)
         {
@@ -30,10 +33,17 @@ public class PlanEntry
             throw new ArgumentOutOfRangeException(nameof(eventDate));
         }
 
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            throw new ArgumentOutOfRangeException(nameof(description));
+        }
+
         return new PlanEntry(
             planType, 
             eventDate, 
-            amount, repeatOn);
+            amount, 
+            repeatOn,
+            description);
     }
 
     public int Id { get; protected set; }
@@ -44,5 +54,7 @@ public class PlanEntry
 
     public DateOnly EventDate { get; protected set; }
 
-    public PlanRepeatOn? RepeatOn { get; protected set; }
+    public PlanRepeatOn RepeatOn { get; protected set; }
+
+    public string Description { get; protected set; }
 }

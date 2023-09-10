@@ -15,5 +15,11 @@ internal class PlanEntryModelValidator : AbstractValidator<PlanEntryModel>
 
         RuleFor(x => x.PlanType)
             .NotEmpty();
+
+        RuleFor(x => x.RepeatOn)
+            .NotEmpty();
+
+        RuleFor(x => x.Description)
+            .NotEmpty();
     }
 }

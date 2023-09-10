@@ -1,4 +1,5 @@
 import { Component, Type } from '@angular/core';
+import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanEntryComponent } from './../plan-entry/plan-entry.component';
 import { BoundDialogComponent } from './../dialogs/bound-dialog.component';
@@ -12,11 +13,16 @@ import { BoundDialogData } from './../dialogs/bound-dialog-data.interface';
 export class SetupComponent {
   #dialog: MatDialog;
 
+  public saveSubject: Subject<boolean>;
+
   constructor(dialog: MatDialog) {
     this.#dialog = dialog;
+    this.saveSubject = new Subject<boolean>();
   }
 
   public addNewItem(): void {
+    const self = this;
+
     this.#dialog.open<BoundDialogComponent, BoundDialogData>(BoundDialogComponent, {
       data: {
         boundComponent: PlanEntryComponent,
@@ -30,10 +36,15 @@ export class SetupComponent {
             name: "Save",
             callback: PlanEntryComponent.prototype.onSaveClick,
             isDisabledCallback: PlanEntryComponent.prototype.isSaveDisabled,
+            onExecute: (action: Subject<boolean>) => { self.onExecuteAction(action); },
             color: "primary"
           }
         ]
       }
     });
+  }
+
+  public onExecuteAction(action: Subject<boolean>): void {
+    this.saveSubject = action;
   }
 }

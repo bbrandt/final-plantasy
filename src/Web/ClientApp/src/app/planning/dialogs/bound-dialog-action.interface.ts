@@ -5,4 +5,5 @@ export interface BoundDialogAction {
     color?: string;
     callback: () => Subject<boolean>;
     isDisabledCallback?: () => boolean;
+    onExecute?: (action: Subject<boolean>) => void;
 }
