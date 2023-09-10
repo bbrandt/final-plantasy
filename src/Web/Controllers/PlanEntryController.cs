@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TRS.FinalPlantasy.Application.Abstractions.Planning;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Commands;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Queries;
-using TRS.FinalPlantasy.Application.Abstractions.Repositories;
 using TRS.FinalPlantasy.Application.Abstractions.Validations;
 
 namespace TRS.FinalPlantasy.Web.Controllers;
@@ -84,5 +83,19 @@ public class PlanEntryController : ControllerBase
         var response = await _mediator.Send(command);
 
         return response;
+    }
+
+    [HttpGet]
+    [Route("/api/plan-timeline/{endDate}")]
+    public async Task<PlanTimelineModel> GetTimeline(DateOnly endDate)
+    {
+        var query = new PlanTimelineQuery
+        {
+            EndDate = endDate
+        };
+
+        var model = await _mediator.Send(query);
+
+        return model;
     }
 }
