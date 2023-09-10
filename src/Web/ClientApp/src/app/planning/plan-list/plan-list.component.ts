@@ -16,9 +16,14 @@ export class PlanListComponent implements OnInit, OnChanges {
   @Input()
   public refreshSubject!: Subject<boolean>;
 
+  @Input()
+  public communicator!: PlanListComponentCommunicator;
+
   public displayedColumns = ["actions", "planType", "eventDate", "amount", "repeatOn", "description"];
 
-  constructor(planEntryService: PlanEntryService) {
+  constructor(
+    planEntryService: PlanEntryService)
+  {
     this.#planEntryService = planEntryService;
   }
 
@@ -32,11 +37,11 @@ export class PlanListComponent implements OnInit, OnChanges {
   }
 
   public editPlan(row: PlanEntryModel) {
-    console.log(row);
+    this.communicator.editClick(row);
   }
 
   public deletePlan(row: PlanEntryModel) {
-    console.log(row);
+    this.communicator.deleteClick(row);
   }
 
   private checkRefreshSubject(): void {
@@ -50,4 +55,9 @@ export class PlanListComponent implements OnInit, OnChanges {
         }
     });
   }
+}
+
+export interface PlanListComponentCommunicator {
+  editClick: (model: PlanEntryModel) => void;
+  deleteClick: (model: PlanEntryModel) => void;
 }

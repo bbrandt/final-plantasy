@@ -33,10 +33,12 @@ export class BoundDialogComponent implements OnInit, OnDestroy
 
   public ngOnInit(): void {
     this.#componentRef = this.dialogBody.viewContainerRef.createComponent(this.#data.boundComponent);
+    this.#componentRef.instance.componentData = this.#data.componentData;
   }
 
   public ngOnDestroy(): void {
-      
+    this.#componentRef.destroy();
+    this.#isBusy.complete();
   }
 
   public title(): string {

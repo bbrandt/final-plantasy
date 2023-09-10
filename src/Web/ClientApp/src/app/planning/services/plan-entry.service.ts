@@ -42,6 +42,13 @@ export class PlanEntryService {
       .get<PlanEntryModel[]>(url, params);
   }
 
+  public findPlan(id: number): Observable<PlanEntryModel> {
+    const url = this.#urlBuilder.build(`api/plan-entry/${id}`);
+
+    return this.#httpClient
+      .get<PlanEntryModel>(url);
+  }
+
   public addOrUpdatePlan(model: PlanEntryModel): Observable<ResultResponse<number | null>> {
     const url = this.#urlBuilder.build("api/plan-entry/add-or-update");
 

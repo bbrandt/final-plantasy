@@ -44,14 +44,16 @@ internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
         var response = await mediator.Send(command);
 
         // Assert
-        var context = _serviceProvider!.GetRequiredService<IPlanningQueryContext>();
-
-        var entity = context.PlanEntries.Single(x => x.Id == response.Value);
+        var persistedModel = await mediator.Send(
+            new PlanEntryByIdQuery 
+            { 
+                Id = response.Value.GetValueOrDefault()
+            });
 
         var assertions = new 
         { 
             response,
-            entity
+            persistedModel
         };
 
         await Verify(assertions)

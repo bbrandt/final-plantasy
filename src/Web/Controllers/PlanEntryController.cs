@@ -29,6 +29,20 @@ public class PlanEntryController : ControllerBase
         return models;
     }
 
+    [HttpGet]
+    [Route("/api/plan-entry/{id}")]
+    public async Task<PlanEntryModel> GetById(int id)
+    {
+        var query = new PlanEntryByIdQuery 
+        { 
+            Id = id
+        };
+
+        var models = await _mediator.Send(query);
+
+        return models;
+    }
+
     [HttpPost]
     [Route("/api/plan-entry/add-or-update")]
     public async Task<ResultResponse<int?>> AddOrUpdate(PlanEntryModel model)
