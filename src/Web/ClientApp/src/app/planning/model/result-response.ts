@@ -4,3 +4,4 @@ export interface ResultResponse<T> {
   value?: T;
   messages: ValidationMessage[];
 }
+

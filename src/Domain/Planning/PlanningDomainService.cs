@@ -13,7 +13,7 @@ public class PlanningDomainService
     /// <param name="repeatOn"></param>
     /// <returns></returns>
     /*
-     * This domain is a little anemic but so far it does not have much behavior.
+     * This domain is anemic but so far it does not have much behavior.
      */
     public PlanEntry CreatePlanEntry(
         PlanType planType,
@@ -28,5 +28,20 @@ public class PlanningDomainService
             amount,
             repeatOn,
             description);
+    }
+
+    public void UpdatePlanEntry(
+        PlanType planType,
+        DateOnly eventDate,
+        double amount,
+        PlanRepeatOn repeatOn,
+        string description,
+        PlanEntry entity)
+    {
+        entity.CreditOrDebit(planType)
+            .OnEventDate(eventDate)
+            .ForAmount(amount)
+            .RepeatPlanOn(repeatOn)
+            .DescribedAs(description);
     }
 }

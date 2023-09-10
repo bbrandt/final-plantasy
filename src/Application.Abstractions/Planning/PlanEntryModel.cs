@@ -1,8 +1,9 @@
-﻿using TRS.FinalPlantasy.Domain.Model.Planning;
+﻿using TRS.FinalPlantasy.Application.Abstractions.Repositories;
+using TRS.FinalPlantasy.Domain.Model.Planning;
 
 namespace TRS.FinalPlantasy.Application.Abstractions.Planning;
 
-public class PlanEntryModel
+public class PlanEntryModel : PersistedModel
 {
     public int? Id { get; set; }
 

@@ -20,7 +20,9 @@ public static class ServicesExtensions
 
         services.AddApplicationOptions(configuration);
 
-        services.AddTransient<IPlanningApplicationService, PlanningApplicationService>();
+        services.AddTransient<IAddPlanApplicationService, AddPlanApplicationService>();
+        services.AddTransient<IUpdatePlanApplicationService, UpdatePlanApplicationService>();
+        services.AddTransient<IDeletePlanApplicationService, DeletePlanApplicationService>();
         services.AddTransient<IValidator<PlanEntryModel>, PlanEntryModelValidator>();
 
         services.AddPlanningDomain();

@@ -4,7 +4,7 @@ using TRS.FinalPlantasy.Application.Abstractions.Planning.Queries;
 
 namespace TRS.FinalPlantasy.Application.Planning.Queries;
 
-internal class PlanEntryByIdQueryHandler : IRequestHandler<PlanEntryByIdQuery, PlanEntryModel>
+internal class PlanEntryByIdQueryHandler : IRequestHandler<PlanEntryByIdQuery, PlanEntryModel?>
 {
     private readonly IPlanningQueryContext _queryContext;
 
@@ -13,7 +13,7 @@ internal class PlanEntryByIdQueryHandler : IRequestHandler<PlanEntryByIdQuery, P
         _queryContext = queryContext;
     }
 
-    public Task<PlanEntryModel> Handle(PlanEntryByIdQuery request, CancellationToken cancellationToken)
+    public Task<PlanEntryModel?> Handle(PlanEntryByIdQuery request, CancellationToken cancellationToken)
     {
         var entry = _queryContext.PlanEntries
             .Where(x => x.Id == request.Id)
@@ -27,7 +27,7 @@ internal class PlanEntryByIdQueryHandler : IRequestHandler<PlanEntryByIdQuery, P
                     RepeatOn = entry.RepeatOn,
                     Description = entry.Description
                 })
-            .Single();
+            .SingleOrDefault();
 
         return Task.FromResult(entry);
     }

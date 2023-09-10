@@ -6,7 +6,7 @@ import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanOptionService } from './../services/plan-option.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { ValidationMessage } from './../model/validation-message';
-import { PlanRepeatOn } from '../model/plan-repeat-on.enum';
+import { PersistentState } from './../model/persistent-state.enum';
 
 @Component({
   selector: 'plan-entry',
@@ -74,10 +74,17 @@ export class PlanEntryComponent implements OnInit {
       eventDate: this.planForm.value.eventDate!,
       planType: this.planForm.value.planType?.id!,
       description: this.planForm.value.description!,
-      repeatOn: this.planForm.value.repeatOn?.id!
+      repeatOn: this.planForm.value.repeatOn?.id!,
+      persistentState: this.componentData?.model?.id ?
+        PersistentState.Updated :
+        PersistentState.Added
     };
 
-    this.#planEntryService.addOrUpdatePlan(model)
+    const method = model.persistentState == PersistentState.Updated ?
+      this.#planEntryService.updatePlan :
+      this.#planEntryService.addPlan;
+
+    method.call(this.#planEntryService, model)
       .pipe(take(1))
       .subscribe((response) => {
         this.validationMessages = response.messages;
@@ -117,7 +124,7 @@ export class PlanEntryComponent implements OnInit {
   }
 
   private findOption(options: OptionModel[], id: number | undefined): OptionModel | null | undefined {
-    if (!id) {
+    if (id === undefined) {
       return null;
     }
 

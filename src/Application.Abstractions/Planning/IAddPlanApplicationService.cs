@@ -2,13 +2,13 @@
 
 namespace TRS.FinalPlantasy.Application.Abstractions.Planning;
 
-public interface IPlanningApplicationService
+public interface IAddPlanApplicationService
 {
     /// <summary>
-    /// Add a new plan entry. The application service is the direct client of the domain.
+    /// Add a plan entry. The application service is the direct client of the domain.
     /// </summary>
     /// <param name="model"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ResultResponse<int?>> AddPlanEntryAsync(PlanEntryModel model, CancellationToken cancellationToken);
+    Task<ResultResponse<int?>> AddAsync(PlanEntryModel model, CancellationToken cancellationToken);
 }

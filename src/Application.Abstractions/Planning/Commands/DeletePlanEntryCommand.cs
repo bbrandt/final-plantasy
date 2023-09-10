@@ -3,7 +3,7 @@ using TRS.FinalPlantasy.Application.Abstractions.Validations;
 
 namespace TRS.FinalPlantasy.Application.Abstractions.Planning.Commands;
 
-public class NewPlanEntryCommand : IRequest<ResultResponse<int?>>
+public class DeletePlanEntryCommand : IRequest<Response>
 {
-    public PlanEntryModel? Model { get; set; }
+    public int Id { get; set; }
 }

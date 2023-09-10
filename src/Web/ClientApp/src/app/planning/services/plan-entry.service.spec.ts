@@ -5,6 +5,7 @@ import { PlanEntryService } from './plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { PlanType } from './../model/plan-type.enum';
 import { PlanRepeatOn } from './../model/plan-repeat-on.enum';
+import { PersistentState } from './../model/persistent-state.enum';
 import { take } from 'rxjs';
 
 describe("PlanEntryService", () => {
@@ -27,9 +28,9 @@ describe("PlanEntryService", () => {
 
   it('findPlans returns plans', () => {
     const testData: PlanEntryModel[] = [
-      { eventDate: '2020-05-01', planType: PlanType.Credit, amount: 500, description: "First Line", repeatOn: PlanRepeatOn.None },
-      { eventDate: '2012-12-12', planType: PlanType.Debit, amount: 7500, description: "Second Line", repeatOn: PlanRepeatOn.BiWeekly },
-      { eventDate: '2001-01-07', planType: PlanType.Credit, amount: 1337, description: "Third Line", repeatOn: PlanRepeatOn.Monthly }
+      { eventDate: '2020-05-01', planType: PlanType.Credit, amount: 500, description: "First Line", repeatOn: PlanRepeatOn.None, persistentState: PersistentState.None },
+      { eventDate: '2012-12-12', planType: PlanType.Debit, amount: 7500, description: "Second Line", repeatOn: PlanRepeatOn.BiWeekly, persistentState: PersistentState.None },
+      { eventDate: '2001-01-07', planType: PlanType.Credit, amount: 1337, description: "Third Line", repeatOn: PlanRepeatOn.Monthly, persistentState: PersistentState.None }
     ];
 
     const plans = planEntryService.findPlans();
@@ -46,9 +47,5 @@ describe("PlanEntryService", () => {
     expect(testRequest.request.method).toBe('GET');
 
     testRequest.flush(testData);
-  });
-
-  it('addOrUpdate plans returns a response', () => {
-
   });
 });

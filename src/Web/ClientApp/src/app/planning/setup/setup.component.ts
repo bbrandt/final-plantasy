@@ -1,4 +1,4 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanEntryEditorDialogService, PlanEntryEditorCommunicator } from './../services/plan-entry-editor-dialog.service';
@@ -48,7 +48,7 @@ export class SetupComponent {
   }
 
   private deleteItem(model: PlanEntryModel): void {
-    console.log(this);
+    this.#editorService.delete(this.#dialog, this.#dialogEditorCommunicator, model);
   }
 
   private editItem(model: PlanEntryModel): void {

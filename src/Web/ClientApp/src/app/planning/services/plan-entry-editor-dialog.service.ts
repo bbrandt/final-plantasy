@@ -6,6 +6,7 @@ import { BoundDialogData } from './../dialogs/bound-dialog-data.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanEntryService } from './plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
+import { PlanEntryDeleteComponent } from './../plan-entry-delete/plan-entry-delete.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,29 @@ export class PlanEntryEditorDialogService {
       });
   }
 
-  public delete(dialog: MatDialog, communicator: PlanEntryEditorCommunicator, id: number, description: string): void {
-    // prompt for delete
+  public delete(dialog: MatDialog, communicator: PlanEntryEditorCommunicator, model: PlanEntryModel): void {
+    dialog.open<BoundDialogComponent, BoundDialogData>(BoundDialogComponent, {
+      data: {
+        boundComponent: PlanEntryDeleteComponent,
+        title: 'Delete entry?',
+        componentData: {
+          model: model
+        },
+        actions: [
+          {
+            name: 'Cancel',
+            callback: PlanEntryDeleteComponent.prototype.onCancelClick
+          },
+          {
+            name: 'Delete',
+            callback: PlanEntryDeleteComponent.prototype.onSaveClick,
+            isDisabledCallback: PlanEntryDeleteComponent.prototype.isSaveDisabled,
+            onExecute: communicator.onExecuteAction,
+            color: 'warn'
+          }
+        ]
+      }
+    });
   }
 
   private openDialog(

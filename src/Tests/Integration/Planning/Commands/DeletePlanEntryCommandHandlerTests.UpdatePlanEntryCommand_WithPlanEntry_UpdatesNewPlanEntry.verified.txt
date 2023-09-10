@@ -1,0 +1,13 @@
+﻿{
+  response: {
+    Value: 1
+  },
+  persistedModel: {
+    Id: 1,
+    PlanType: Debit,
+    EventDate: 1983-12-12,
+    Amount: 5555.0,
+    RepeatOn: Monthly,
+    Description: Tuition Update
+  }
+}

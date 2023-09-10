@@ -7,6 +7,7 @@ import { AngularMaterialModule } from './../material.module';
 
 import { SetupComponent } from './setup/setup.component';
 import { PlanEntryComponent } from './plan-entry/plan-entry.component';
+import { PlanEntryDeleteComponent } from './plan-entry-delete/plan-entry-delete.component';
 import { PlanListComponent } from './plan-list/plan-list.component';
 import { DialogBodyDirective } from './dialogs/dialog-body.directive';
 import { BoundDialogComponent } from './dialogs/bound-dialog.component';
@@ -16,6 +17,7 @@ import { ValidationPanelComponent } from './validation-panel/validation-panel.co
   declarations: [
     SetupComponent,
     PlanEntryComponent,
+    PlanEntryDeleteComponent,
     PlanListComponent,
     ValidationPanelComponent,
     BoundDialogComponent,

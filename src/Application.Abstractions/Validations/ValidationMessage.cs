@@ -10,6 +10,11 @@ public class ValidationMessage
         Message = message;
     }
 
+    public static ValidationMessage AsError(string message)
+    {
+        return new ValidationMessage(ValidationType.Error, message);
+    }
+
     public ValidationType ValidationType { get; }
 
     public string Message { get; }

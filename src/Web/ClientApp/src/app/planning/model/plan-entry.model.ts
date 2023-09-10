@@ -1,5 +1,6 @@
 import { PlanType } from './plan-type.enum';
 import { PlanRepeatOn } from './plan-repeat-on.enum';
+import { PersistentState } from './persistent-state.enum';
 
 export interface PlanEntryModel {
   id?: number | undefined;
@@ -8,5 +9,6 @@ export interface PlanEntryModel {
   amount: number;
   description: string;
   repeatOn: PlanRepeatOn;
+  persistentState: PersistentState
 }
 

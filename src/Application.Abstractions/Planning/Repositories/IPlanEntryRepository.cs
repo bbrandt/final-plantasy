@@ -11,4 +11,20 @@ public interface IPlanEntryRepository
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task AddAsync(PlanEntry entity, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Find an entry by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<PlanEntry?> FindAsync(int id, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Removes an entry
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task RemoveAsync(int id, CancellationToken cancellationToken);
 }

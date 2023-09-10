@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 using TRS.FinalPlantasy.Application.Abstractions.Planning;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Commands;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Queries;
@@ -9,7 +10,7 @@ using TRS.FinalPlantasy.Tests.Support;
 namespace TRS.FinalPlantasy.Tests.Integration.Planning.Commands;
 
 [IntegrationTest]
-internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
+internal class DeletePlanEntryCommandHandlerTests : DatabaseIntegrationTest
 {
     private IServiceProvider? _serviceProvider;
 
@@ -21,24 +22,17 @@ internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
     }
 
     [Test]
-    public async Task NewPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry()
+    public async Task DeletePlanEntryCommand_WithPlanEntry_DeletesNewPlanEntry()
     {
         // Arrange
+        var entryId = await CreateNewEntry();
+
         var mediator = _serviceProvider!.GetRequiredService<IMediator>();
 
         // Act
-        var model = new PlanEntryModel
-        {
-            PlanType = PlanType.Credit,
-            Amount = 1337.7,
-            EventDate = new DateOnly(2023, 12, 12),
-            RepeatOn = PlanRepeatOn.Yearly,
-            Description = "Tuition"            
-        };
-
-        var command = new NewPlanEntryCommand 
+        var command = new DeletePlanEntryCommand 
         { 
-            Model = model
+            Id = entryId
         };
 
         var response = await mediator.Send(command);
@@ -47,7 +41,7 @@ internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
         var persistedModel = await mediator.Send(
             new PlanEntryByIdQuery 
             { 
-                Id = response.Value.GetValueOrDefault()
+                Id = entryId
             });
 
         var assertions = new 
@@ -58,5 +52,31 @@ internal class NewPlanEntryCommandHandlerTests : DatabaseIntegrationTest
 
         await Verify(assertions)
             .DontScrubDateTimes();
+    }
+
+    private async Task<int> CreateNewEntry()
+    {
+        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+
+        var model = new PlanEntryModel
+        {
+            PlanType = PlanType.Credit,
+            Amount = 1337.7,
+            EventDate = new DateOnly(2023, 12, 12),
+            RepeatOn = PlanRepeatOn.Yearly,
+            Description = "Tuition"
+        };
+
+        var command = new AddPlanEntryCommand
+        {
+            Model = model
+        };
+
+        var response = await mediator.Send(command);
+
+        response.Messages.ShouldBeEmpty();
+        response.Value.ShouldNotBe(null);
+
+        return response.Value.GetValueOrDefault();
     }
 }
