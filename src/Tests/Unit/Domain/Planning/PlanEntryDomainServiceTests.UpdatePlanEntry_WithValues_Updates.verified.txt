@@ -1,0 +1,9 @@
+﻿{
+  entry: {
+    PlanType: Debit,
+    Amount: 765.0,
+    EventDate: 2005-05-05,
+    RepeatOn: Yearly,
+    Description: This is an updated plan
+  }
+}

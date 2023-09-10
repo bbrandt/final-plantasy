@@ -1,0 +1,8 @@
+﻿{
+  entry: {
+    Amount: 155.55,
+    EventDate: 1995-05-05,
+    RepeatOn: BiWeekly,
+    Description: This is a new plan
+  }
+}

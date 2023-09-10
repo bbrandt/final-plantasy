@@ -8,6 +8,7 @@
     <IsTestProject>true</IsTestProject>
     <AssemblyName>TRS.FinalPlantasy.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>TRS.FinalPlantasy.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <UserSecretsId>29815f67-33d2-4156-a5e3-4f58a26fb7df</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,10 +28,6 @@
     <PackageReference Include="Shouldly" Version="4.2.1" />
     <PackageReference Include="Testcontainers.MsSql" Version="3.4.0" />
     <PackageReference Include="Verify.NUnit" Version="21.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Unit\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +51,10 @@
     </None>
     <None Update="Integration\Planning\Commands\AddPlanEntryCommandHandlerTests.NewPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
       <DependentUpon>AddPlanEntryCommandHandlerTests.cs</DependentUpon>
+    </None>
+    <None Update="Unit\Domain\Planning\PlanningEntryDomainServiceTests.AddPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <DependentUpon>PlanningEntryDomainServiceTests.cs</DependentUpon>
     </None>
   </ItemGroup>
 

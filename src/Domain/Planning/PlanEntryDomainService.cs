@@ -2,7 +2,7 @@
 
 namespace TRS.FinalPlantasy.Domain.Planning;
 
-public class PlanningDomainService
+public class PlanEntryDomainService
 {
     /// <summary>
     /// Create a new plant entry entity

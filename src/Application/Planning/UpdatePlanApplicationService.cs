@@ -11,12 +11,12 @@ internal class UpdatePlanApplicationService : IUpdatePlanApplicationService
 {
     private readonly IValidator<PlanEntryModel> _validator;
     private readonly IPlanEntryUnitOfWorkFactory _unitOfWorkFactory;
-    private readonly PlanningDomainService _domainService;
+    private readonly PlanEntryDomainService _domainService;
 
     public UpdatePlanApplicationService(
         IValidator<PlanEntryModel> validator,
         IPlanEntryUnitOfWorkFactory unitOfWorkFactory,
-        PlanningDomainService domainService)
+        PlanEntryDomainService domainService)
     {
         _validator = validator;
         _unitOfWorkFactory = unitOfWorkFactory;
