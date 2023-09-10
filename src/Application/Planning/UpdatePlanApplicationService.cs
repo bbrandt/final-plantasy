@@ -3,7 +3,7 @@ using TRS.FinalPlantasy.Application.Abstractions.Planning;
 using TRS.FinalPlantasy.Application.Abstractions.Planning.Repositories;
 using TRS.FinalPlantasy.Application.Abstractions.Validations;
 using TRS.FinalPlantasy.Application.Validations;
-using TRS.FinalPlantasy.Domain.Planning;
+using TRS.FinalPlantasy.Domain.Abstractions.Planning;
 
 namespace TRS.FinalPlantasy.Application.Planning;
 
@@ -11,12 +11,12 @@ internal class UpdatePlanApplicationService : IUpdatePlanApplicationService
 {
     private readonly IValidator<PlanEntryModel> _validator;
     private readonly IPlanEntryUnitOfWorkFactory _unitOfWorkFactory;
-    private readonly PlanEntryDomainService _domainService;
+    private readonly IPlanEntryDomainService _domainService;
 
     public UpdatePlanApplicationService(
         IValidator<PlanEntryModel> validator,
         IPlanEntryUnitOfWorkFactory unitOfWorkFactory,
-        PlanEntryDomainService domainService)
+        IPlanEntryDomainService domainService)
     {
         _validator = validator;
         _unitOfWorkFactory = unitOfWorkFactory;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TRS.FinalPlantasy.Domain.Abstractions.Planning;
 using TRS.FinalPlantasy.Domain.Model.Planning;
-using TRS.FinalPlantasy.Domain.Planning;
 using TRS.FinalPlantasy.Tests.Support;
 
 namespace TRS.FinalPlantasy.Tests.Unit.Domain.Planning;
@@ -22,7 +22,7 @@ internal class PlanEntryDomainServiceTests
     public async Task CreatePlanEntry_WithValues_Creates()
     {
         // Arrange
-        var service = _serviceProvider!.GetRequiredService<PlanEntryDomainService>();
+        var service = _serviceProvider!.GetRequiredService<IPlanEntryDomainService>();
 
         // Act
         var entry = service.CreatePlanEntry(
@@ -46,7 +46,7 @@ internal class PlanEntryDomainServiceTests
     public async Task UpdatePlanEntry_WithValues_Updates()
     {
         // Arrange
-        var service = _serviceProvider!.GetRequiredService<PlanEntryDomainService>();
+        var service = _serviceProvider!.GetRequiredService<IPlanEntryDomainService>();
 
         // Act
         var entry = PlanEntry.NewEntry(

@@ -2,10 +2,10 @@
 
 public class PlanTimeline
 {
-    public PlanTimeline(IEnumerable<PlanEvent> events)
+    public PlanTimeline(IEnumerable<PlanEventWithBalance> events)
     {
         Events = events.ToList();
     }
 
-    public IReadOnlyCollection<PlanEvent> Events { get; }
+    public IReadOnlyCollection<PlanEventWithBalance> Events { get; }
 }

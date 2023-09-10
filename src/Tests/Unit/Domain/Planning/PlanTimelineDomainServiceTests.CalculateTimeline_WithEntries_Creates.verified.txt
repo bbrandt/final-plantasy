@@ -1,3 +1,169 @@
 ﻿{
-  timeline: {}
+  timeline: {
+    Events: [
+      {
+        Date: 2023-09-10,
+        Balance: 50000.0,
+        Descriptions: [
+          Starting balance
+        ]
+      },
+      {
+        Date: 2023-10-01,
+        Balance: 49000.0,
+        Descriptions: [
+          Monthly cost,
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-10-15,
+        Balance: 51000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-10-29,
+        Balance: 53000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-10-31,
+        Balance: 50000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2023-11-12,
+        Balance: 52000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-11-26,
+        Balance: 54000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-11-30,
+        Balance: 51000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2023-12-10,
+        Balance: 53000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-12-24,
+        Balance: 55000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2023-12-30,
+        Balance: 52000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2024-01-07,
+        Balance: 54000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-01-21,
+        Balance: 56000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-01-29,
+        Balance: 53000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2024-02-04,
+        Balance: 55000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-02-18,
+        Balance: 57000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-02-28,
+        Balance: 54000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2024-03-03,
+        Balance: 56000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-03-17,
+        Balance: 58000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-03-29,
+        Balance: 55000.0,
+        Descriptions: [
+          Monthly cost
+        ]
+      },
+      {
+        Date: 2024-03-31,
+        Balance: 57000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-04-14,
+        Balance: 59000.0,
+        Descriptions: [
+          Pay period
+        ]
+      },
+      {
+        Date: 2024-04-28,
+        Balance: 58000.0,
+        Descriptions: [
+          Monthly cost,
+          Pay period
+        ]
+      }
+    ]
+  }
 }

@@ -1,8 +1,9 @@
-﻿using TRS.FinalPlantasy.Domain.Model.Planning;
+﻿using TRS.FinalPlantasy.Domain.Abstractions.Planning;
+using TRS.FinalPlantasy.Domain.Model.Planning;
 
 namespace TRS.FinalPlantasy.Domain.Planning;
 
-public class PlanEntryDomainService
+internal class PlanEntryDomainService : IPlanEntryDomainService
 {
     /// <summary>
     /// Create a new plant entry entity

@@ -34,6 +34,7 @@
     <ProjectReference Include="..\Application.Abstractions\Application.Abstractions.csproj" />
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\DatabaseMigrator\DatabaseMigrator.csproj" />
+    <ProjectReference Include="..\Domain.Abstractions\Domain.Abstractions.csproj" />
     <ProjectReference Include="..\Infrastructure.SqlServer\Infrastructure.SqlServer.csproj" />
   </ItemGroup>
 
