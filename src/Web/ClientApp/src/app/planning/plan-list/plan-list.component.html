@@ -17,6 +17,11 @@
     <mat-cell *matCellDef="let plan">{{ plan.eventDate }}</mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="endDate">
+    <mat-header-cell *matHeaderCellDef>End Date</mat-header-cell>
+    <mat-cell *matCellDef="let plan">{{ plan.endDate }}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="amount">
     <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
     <mat-cell *matCellDef="let plan">{{ plan.amount }}</mat-cell>

@@ -39,7 +39,8 @@ internal class UpdatePlanEntryCommandHandlerTests : DatabaseIntegrationTest
             EventDate = new DateOnly(1983, 12, 12),
             RepeatOn = PlanRepeatOn.Monthly,
             Description = "Tuition Update",
-            PersistentState = PersistentState.Updated
+            PersistentState = PersistentState.Updated,
+            EndDate = new DateOnly(2030, 1, 1)
         };
 
         var command = new UpdatePlanEntryCommand 
@@ -76,7 +77,8 @@ internal class UpdatePlanEntryCommandHandlerTests : DatabaseIntegrationTest
             Amount = 1337.7,
             EventDate = new DateOnly(2023, 12, 12),
             RepeatOn = PlanRepeatOn.Yearly,
-            Description = "Tuition"
+            Description = "Tuition",
+            EndDate = new DateOnly(2025, 1, 1)
         };
 
         var command = new AddPlanEntryCommand

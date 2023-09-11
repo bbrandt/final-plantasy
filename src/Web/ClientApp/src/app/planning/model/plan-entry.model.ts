@@ -9,6 +9,7 @@ export interface PlanEntryModel {
   amount: number;
   description: string;
   repeatOn: PlanRepeatOn;
-  persistentState: PersistentState
+  endDate: string | undefined | null;
+  persistentState: PersistentState;
 }
 

@@ -31,19 +31,22 @@ internal class PlanTimelineDomainServiceTests
                 new DateOnly(2023, 9, 10),
                 50000,
                 PlanRepeatOn.None,
-                "Starting balance"),
+                "Starting balance",
+                null),
             PlanEntry.NewEntry(
                 PlanType.Credit,
                 new DateOnly(2023, 10, 1),
                 2000,
                 PlanRepeatOn.BiWeekly,
-                "Pay period"),
+                "Pay period",
+                new DateOnly(2024, 2, 1)),
             PlanEntry.NewEntry(
                 PlanType.Debit,
                 new DateOnly(2023, 10, 1),
                 3000,
                 PlanRepeatOn.Monthly,
-                "Monthly cost"),
+                "Monthly cost",
+                null),
         };
 
         var end = new DateOnly(2024, 5, 1);

@@ -10,14 +10,16 @@ public class PlanEntry
         DateOnly eventDate,
         double amount,
         PlanRepeatOn repeatOn,
-        string description)
+        string description,
+        DateOnly? endDate)
     {
         Update(
             planType,
             eventDate,
             amount,
             repeatOn,
-            description);
+            description,
+            endDate);
     }
 
     public static PlanEntry NewEntry(
@@ -25,14 +27,16 @@ public class PlanEntry
         DateOnly eventDate,
         double amount,
         PlanRepeatOn repeatOn,
-        string description)
+        string description,
+        DateOnly? endDate)
     {     
         return new PlanEntry(
             planType, 
             eventDate, 
             amount, 
             repeatOn,
-            description);
+            description,
+            endDate);
     }
 
     public void Update(
@@ -40,13 +44,15 @@ public class PlanEntry
         DateOnly eventDate,
         double amount,
         PlanRepeatOn repeatOn,
-        string description)
+        string description,
+        DateOnly? endDate)
     {
         CreditOrDebit(planType)
             .OnEventDate(eventDate)
             .ForAmount(amount)
             .RepeatPlanOn(repeatOn)
-            .DescribedAs(description);
+            .DescribedAs(description)
+            .EndsOn(endDate);
     }
 
     public int Id { get; protected set; }
@@ -60,6 +66,8 @@ public class PlanEntry
     public PlanRepeatOn RepeatOn { get; protected set; }
 
     public string Description { get; protected set; }
+
+    public DateOnly? EndDate { get; protected set; }
 
     public PlanEntry CreditOrDebit(PlanType planType)
     {
@@ -107,6 +115,18 @@ public class PlanEntry
     public PlanEntry RepeatPlanOn(PlanRepeatOn repeatOn)
     {
         RepeatOn = repeatOn;
+
+        return this;
+    }
+
+    public PlanEntry EndsOn(DateOnly? endDate)
+    {
+        if (endDate <= EventDate)
+        {
+            throw new ArgumentOutOfRangeException(nameof(endDate));
+        }
+
+        EndDate = endDate;
 
         return this;
     }

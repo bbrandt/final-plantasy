@@ -20,7 +20,8 @@ public interface IPlanEntryDomainService
         DateOnly eventDate,
         double amount,
         PlanRepeatOn repeatOn,
-        string description);
+        string description,
+        DateOnly? endDate);
 
     void UpdatePlanEntry(
         PlanType planType,
@@ -28,5 +29,6 @@ public interface IPlanEntryDomainService
         double amount,
         PlanRepeatOn repeatOn,
         string description,
+        DateOnly? endDate,
         PlanEntry entity);
 }

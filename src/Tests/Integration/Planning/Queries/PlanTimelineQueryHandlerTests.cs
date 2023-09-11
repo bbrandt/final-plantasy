@@ -76,7 +76,8 @@ internal class PlanTimelineQueryHandlerTests : DatabaseIntegrationTest
                 Amount = 150,
                 EventDate = new DateOnly(2023, 12, 12),
                 RepeatOn = PlanRepeatOn.Monthly,
-                Description = "Monthly Gain"
+                Description = "Monthly Gain",
+                EndDate = new DateOnly(2024, 6, 1)
             }
         };
 

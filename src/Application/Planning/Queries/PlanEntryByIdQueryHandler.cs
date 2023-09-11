@@ -25,7 +25,8 @@ internal class PlanEntryByIdQueryHandler : IRequestHandler<PlanEntryByIdQuery, P
                     EventDate = entry.EventDate,
                     Amount = entry.Amount,
                     RepeatOn = entry.RepeatOn,
-                    Description = entry.Description
+                    Description = entry.Description,
+                    EndDate = entry.EndDate
                 })
             .SingleOrDefault();
 

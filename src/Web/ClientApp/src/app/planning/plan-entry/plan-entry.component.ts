@@ -51,10 +51,10 @@ export class PlanEntryComponent implements OnInit {
     this.planForm = this.createPlanForm();
   }
 
-  public setEventDate(e: any) {
+  public setFieldDate(e: any, fieldName: string) {
     const convertDate = new Date(e.target.value).toISOString().substring(0, 10);
 
-    this.planForm.get('eventDate')?.setValue(convertDate, {
+    this.planForm.get(fieldName)?.setValue(convertDate, {
       onlyself: true,
     });
   }
@@ -75,6 +75,7 @@ export class PlanEntryComponent implements OnInit {
       planType: this.planForm.value.planType?.id!,
       description: this.planForm.value.description!,
       repeatOn: this.planForm.value.repeatOn?.id!,
+      endDate: this.planForm.value.endDate,
       persistentState: this.componentData?.model?.id ?
         PersistentState.Updated :
         PersistentState.Added
@@ -115,11 +116,12 @@ export class PlanEntryComponent implements OnInit {
     const modelRepeatOn = this.findOption(this.repeatOptions, model?.repeatOn);
 
     return this.#formBuilder.group({
-      planType: [modelPlanType ?? null, Validators.required],
-      amount: [model?.amount ?? null, Validators.required],
-      eventDate: [model?.eventDate ?? null, Validators.required],
-      description: [model?.description ?? null, Validators.required],
-      repeatOn: [modelRepeatOn ?? null, Validators.required]
+      planType: [modelPlanType, Validators.required],
+      amount: [model?.amount, Validators.required],
+      eventDate: [model?.eventDate, Validators.required],
+      description: [model?.description, Validators.required],
+      repeatOn: [modelRepeatOn, Validators.required],
+      endDate: [model?.endDate]
     });
   }
 
@@ -142,7 +144,8 @@ interface FormType {
   amount: FormControl<number | null>,
   eventDate: FormControl<string | null>,
   description: FormControl<string | null>,
-  repeatOn: FormControl<OptionModel | null>
+  repeatOn: FormControl<OptionModel | null>,
+  endDate: FormControl<string | null>
 }
 
 export interface PlanEntryComponentData {

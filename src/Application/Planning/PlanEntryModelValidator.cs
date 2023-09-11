@@ -25,5 +25,8 @@ internal class PlanEntryModelValidator : AbstractValidator<PlanEntryModel>
         RuleFor(x => x.Id)
             .NotEmpty()
             .When(x => x.IsPersisted());
+
+        RuleFor(x => x.EndDate)
+            .GreaterThan(x => x.EventDate);
     }
 }

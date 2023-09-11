@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { DateTime } from 'luxon';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UrlBuilderService } from './../../services/url-builder.service';
@@ -20,9 +20,9 @@ export class PlanTimelineService {
   }
 
   public getTimeline(endDate: Date): Observable<PlanTimelineModel> {
-    const datepipe = new DatePipe('en-US')
+    const dateTime = DateTime.fromJSDate(endDate);
 
-    const endDateParameter = datepipe.transform(endDate, 'dd-MMM-YYYY');
+    const endDateParameter = dateTime.toISODate();
 
     const url = this.#urlBuilder.build(`api/plan-timeline/${endDateParameter}`);
 

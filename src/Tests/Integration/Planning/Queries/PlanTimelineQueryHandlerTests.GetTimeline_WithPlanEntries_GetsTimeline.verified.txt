@@ -60,50 +60,44 @@
       },
       {
         Date: 2024-07-09,
-        Balance: 7200.0,
+        Balance: 7050.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       },
       {
         Date: 2024-08-08,
-        Balance: 6850.0,
+        Balance: 6550.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       },
       {
         Date: 2024-09-07,
-        Balance: 6500.0,
+        Balance: 6050.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       },
       {
         Date: 2024-10-07,
-        Balance: 6150.0,
+        Balance: 5550.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       },
       {
         Date: 2024-11-06,
-        Balance: 5800.0,
+        Balance: 5050.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       },
       {
         Date: 2024-12-06,
-        Balance: 5450.0,
+        Balance: 4550.0,
         Descriptions: [
-          Monthly Cost,
-          Monthly Gain
+          Monthly Cost
         ]
       }
     ]

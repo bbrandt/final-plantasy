@@ -19,7 +19,7 @@ export class PlanListComponent implements OnInit, OnChanges {
   @Input()
   public communicator!: PlanListComponentCommunicator;
 
-  public displayedColumns = ["actions", "planType", "eventDate", "amount", "repeatOn", "description"];
+  public displayedColumns = ["actions", "planType", "eventDate", "endDate", "amount", "repeatOn", "description"];
 
   constructor(
     planEntryService: PlanEntryService)

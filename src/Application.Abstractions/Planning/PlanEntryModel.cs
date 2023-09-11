@@ -16,4 +16,6 @@ public class PlanEntryModel : PersistedModel
     public PlanRepeatOn? RepeatOn { get; set; }
 
     public string? Description { get; set; }
+
+    public DateOnly? EndDate { get; set; }
 }

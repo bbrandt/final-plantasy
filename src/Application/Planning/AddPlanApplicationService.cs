@@ -41,7 +41,8 @@ internal class AddPlanApplicationService : IAddPlanApplicationService
             model.EventDate!.Value, 
             model.Amount!.Value, 
             model.RepeatOn!.Value,
-            model.Description!);
+            model.Description!,
+            model.EndDate);
 
         return await PersistEntityAsync(entity, cancellationToken);
     }

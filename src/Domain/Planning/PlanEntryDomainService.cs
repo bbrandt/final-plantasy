@@ -21,14 +21,16 @@ internal class PlanEntryDomainService : IPlanEntryDomainService
         DateOnly eventDate,
         double amount,
         PlanRepeatOn repeatOn,
-        string description)
+        string description,
+        DateOnly? endDate)
     {
         return PlanEntry.NewEntry(
             planType,
             eventDate,
             amount,
             repeatOn,
-            description);
+            description,
+            endDate);
     }
 
     public void UpdatePlanEntry(
@@ -37,12 +39,14 @@ internal class PlanEntryDomainService : IPlanEntryDomainService
         double amount,
         PlanRepeatOn repeatOn,
         string description,
+        DateOnly? endDate,
         PlanEntry entity)
     {
         entity.CreditOrDebit(planType)
             .OnEventDate(eventDate)
             .ForAmount(amount)
             .RepeatPlanOn(repeatOn)
-            .DescribedAs(description);
+            .DescribedAs(description)
+            .EndsOn(endDate);
     }
 }

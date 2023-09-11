@@ -47,6 +47,7 @@ internal class UpdatePlanApplicationService : IUpdatePlanApplicationService
             model.Amount!.Value,
             model.RepeatOn!.Value,
             model.Description!,
+            model.EndDate,
             entity);
 
         await unitOfWork.CompleteAsync(cancellationToken);

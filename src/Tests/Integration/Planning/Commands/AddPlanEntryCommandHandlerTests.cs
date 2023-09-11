@@ -33,7 +33,8 @@ internal class AddPlanEntryCommandHandlerTests : DatabaseIntegrationTest
             Amount = 1337.7,
             EventDate = new DateOnly(2023, 12, 12),
             RepeatOn = PlanRepeatOn.Yearly,
-            Description = "Tuition"            
+            Description = "Tuition",
+            EndDate = new DateOnly(2025, 1, 1)
         };
 
         var command = new AddPlanEntryCommand 

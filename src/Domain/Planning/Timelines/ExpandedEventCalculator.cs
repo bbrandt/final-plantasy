@@ -55,9 +55,10 @@ internal class ExpandedEventCalculator
     private static IEnumerable<ExpandedEvent> ExpandEventByInterval(
         PlanEntry entry,
         TimeSpan interval,
-        DateOnly endDate)
+        DateOnly totalEndDate)
     {
-        var daysDifference = endDate.DayNumber - entry.EventDate.DayNumber;
+        var effectiveEndDate = CalculateEndDate(entry.EndDate, totalEndDate);
+        var daysDifference = effectiveEndDate.DayNumber - entry.EventDate.DayNumber;
         var intervalCount = daysDifference / interval.TotalDays;
 
         var timeline = new Collection<ExpandedEvent>
@@ -80,6 +81,18 @@ internal class ExpandedEventCalculator
         var total = timeline.Concat(repeats);
 
         return total;
+    }
+
+    private static DateOnly CalculateEndDate(DateOnly? entryEndDate, DateOnly totalEndDate)
+    {
+        if (entryEndDate == null)
+        {
+            return totalEndDate;
+        }
+
+        return entryEndDate < totalEndDate ?
+            entryEndDate.Value :
+            totalEndDate;
     }
 }
 

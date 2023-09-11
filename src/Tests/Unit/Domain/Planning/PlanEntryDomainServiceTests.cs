@@ -30,7 +30,8 @@ internal class PlanEntryDomainServiceTests
             new DateOnly(1995, 5, 5),
             155.55,
             PlanRepeatOn.BiWeekly,
-            "This is a new plan");
+            "This is a new plan",
+            null);
 
         // Assert
         var assertions = new
@@ -54,7 +55,8 @@ internal class PlanEntryDomainServiceTests
             new DateOnly(1995, 5, 5),
             155.55,
             PlanRepeatOn.BiWeekly,
-            "This is a new plan");
+            "This is a new plan",
+            new DateOnly(1996, 1, 1));
 
         service.UpdatePlanEntry(
             PlanType.Debit,
@@ -62,6 +64,7 @@ internal class PlanEntryDomainServiceTests
             765,
             PlanRepeatOn.Yearly,
             "This is an updated plan",
+            null,
             entry);
 
         // Assert
