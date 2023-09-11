@@ -19,10 +19,8 @@ export class PlanTimelineService {
     this.#urlBuilder = urlBuilder;
   }
 
-  public getTimeline(endDate: Date): Observable<PlanTimelineModel> {
-    const dateTime = DateTime.fromJSDate(endDate);
-
-    const endDateParameter = dateTime.toISODate();
+  public getTimeline(endDate: DateTime): Observable<PlanTimelineModel> {
+    const endDateParameter = endDate.toISODate();
 
     const url = this.#urlBuilder.build(`api/plan-timeline/${endDateParameter}`);
 

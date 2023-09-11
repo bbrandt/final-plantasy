@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, BehaviorSubject, take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DateTime } from 'luxon';
 import { OptionModel } from './../model/option.model';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanOptionService } from './../services/plan-option.service';
@@ -51,14 +52,6 @@ export class PlanEntryComponent implements OnInit {
     this.planForm = this.createPlanForm();
   }
 
-  public setFieldDate(e: any, fieldName: string) {
-    const convertDate = new Date(e.target.value).toISOString().substring(0, 10);
-
-    this.planForm.get(fieldName)?.setValue(convertDate, {
-      onlyself: true,
-    });
-  }
-
   public onCancelClick(): Subject<boolean> {
     const subject = new BehaviorSubject<boolean>(true);
 
@@ -71,11 +64,11 @@ export class PlanEntryComponent implements OnInit {
     const model: PlanEntryModel = {
       id: this.componentData?.model?.id,
       amount: this.planForm.value.amount!,
-      eventDate: this.planForm.value.eventDate!,
+      eventDate: this.planForm.value.eventDate!.toISODate()!,
       planType: this.planForm.value.planType?.id!,
       description: this.planForm.value.description!,
       repeatOn: this.planForm.value.repeatOn?.id!,
-      endDate: this.planForm.value.endDate,
+      endDate: this.planForm.value.endDate?.toISODate(),
       persistentState: this.componentData?.model?.id ?
         PersistentState.Updated :
         PersistentState.Added
@@ -142,10 +135,10 @@ export class PlanEntryComponent implements OnInit {
 interface FormType {
   planType: FormControl<OptionModel | null>,
   amount: FormControl<number | null>,
-  eventDate: FormControl<string | null>,
+  eventDate: FormControl<DateTime | null>,
   description: FormControl<string | null>,
   repeatOn: FormControl<OptionModel | null>,
-  endDate: FormControl<string | null>
+  endDate: FormControl<DateTime | null>
 }
 
 export interface PlanEntryComponentData {

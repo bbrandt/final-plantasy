@@ -19,8 +19,7 @@
              readonly
              [matDatepicker]="eventPicker"
              placeholder="Event Date"
-             formControlName="eventDate"
-             (dateChange)="setFieldDate($event, 'eventDate')" />
+             formControlName="eventDate" />
       <mat-datepicker-toggle matSuffix [for]="eventPicker"></mat-datepicker-toggle>
       <mat-datepicker #eventPicker></mat-datepicker>
     </mat-form-field>
@@ -51,8 +50,7 @@
              readonly
              [matDatepicker]="endPicker"
              placeholder="End Date"
-             formControlName="endDate"
-             (dateChange)="setFieldDate($event, 'endDate')" />
+             formControlName="endDate" />
       <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
       <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>

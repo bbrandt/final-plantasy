@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 import { PlanTimelineService } from './../services/plan-timeline.service';
 import { take } from 'rxjs';
 import { PlanEventWithBalanceModel } from './../model/plan-even-with-balance.model';
@@ -11,69 +11,80 @@ import { PlanTimelineModel } from './../model/plan-timeline.model';
   styleUrls: ['./plan-timeline.component.css']
 })
 export class PlanTimelineComponent implements OnInit {
-    readonly #timelineService: PlanTimelineService;
-    #timeline?: PlanTimelineModel;
+  readonly #timelineService: PlanTimelineService;
+  #timeline?: PlanTimelineModel;
 
-    public graphLayout = {
-        autoSize: true,
-        yaxis: {
-            rangemode: 'nonnegative'
+  public graphLayout = {
+    autoSize: true,
+    yaxis: {
+      rangemode: 'nonnegative'
+    }
+  };
+
+  public graphData: any;
+
+  constructor(timelineService: PlanTimelineService) {
+    this.#timelineService = timelineService;
+  }
+
+  ngOnInit(): void {
+    const timelineEnd = this.calculateTimelineEndDate();
+
+    this.#timelineService.getTimeline(timelineEnd)
+      .pipe(take(1))
+      .subscribe((timeline) => {
+          this.#timeline = timeline;
+
+          this.graphData = this.createGraphData(timeline);
+      });
+  }
+
+  private calculateTimelineEndDate(): DateTime {
+    const now = DateTime.now();
+    const duration = Duration.fromObject({ years: 5 });
+
+    const end = now.plus(duration);
+
+    return end;
+  }
+
+  private createGraphData(timeline: PlanTimelineModel): Array<any> {
+    const data = [{
+        x: timeline.events.map((evt: PlanEventWithBalanceModel) => evt.date),
+        y: timeline.events.map((evt: PlanEventWithBalanceModel) => evt.balance),
+        type: 'scatter',
+        mode: 'lines+points',
+        marker: {
+            color: 'purple'
         }
-    };
+    }];
 
-    public graphData: any;
+    return data;
+  }
 
-    constructor(timelineService: PlanTimelineService) {
-        this.#timelineService = timelineService;
-    }
+  public getRemainingTime(): string {
+      if (!this.#timeline || this.#timeline.events.length <= 1) {
+          return "";
+      }
 
-    ngOnInit(): void {
-        this.#timelineService.getTimeline(new Date("2030-1-1"))
-            .pipe(take(1))
-            .subscribe((timeline) => {
-                this.#timeline = timeline;
+      const end = this.#timeline.events
+          .find((item) => {
+              return item.balance <= 0;
+          });
 
-                this.graphData = this.createGraphData(timeline);
-            });
-    }
+      const start = this.#timeline.events[0];
 
-    private createGraphData(timeline: PlanTimelineModel): Array<any> {
-        const data = [{
-            x: timeline.events.map((evt: PlanEventWithBalanceModel) => evt.date),
-            y: timeline.events.map((evt: PlanEventWithBalanceModel) => evt.balance),
-            type: 'scatter',
-            mode: 'lines+points',
-            marker: {
-                color: 'purple'
-            }
-        }];
+      if (!end || !start) {
+          return "";
+      }
 
-        return data;
-    }
+      const endDate = DateTime.fromISO(end.date);
+      const startDate = DateTime.fromISO(start.date)
 
-    public getRemainingTime(): string {
-        if (!this.#timeline || this.#timeline.events.length <= 1) {
-            return "";
-        }
+      const difference = endDate.diff(startDate, ["years"]);
 
-        const end = this.#timeline.events
-            .find((item) => {
-                return item.balance <= 0;
-            });
+      const displayYears = difference.years.toFixed(2);
 
-        const start = this.#timeline.events[0];
-
-        if (!end || !start) {
-            return "";
-        }
-
-        const endDate = DateTime.fromISO(end.date);
-        const startDate = DateTime.fromISO(start.date)
-
-        const difference = endDate.diff(startDate, ["years"]);
-
-        const displayYears = difference.years.toFixed(2);
-
-        return `${displayYears} year(s) to zero`;
-    }
+      return `${displayYears} year(s) to zero`;
+  }
 }

@@ -23,6 +23,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 
+import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    MatLuxonDateModule
   ],
   exports: [
     MatButtonModule,
@@ -68,7 +71,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    MatLuxonDateModule
   ],
   providers: [
     MatDatepickerModule,
