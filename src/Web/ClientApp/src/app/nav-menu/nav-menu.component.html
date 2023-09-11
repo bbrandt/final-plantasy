@@ -18,16 +18,16 @@
 
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">
-              <span [routerLinkActive]="['link-text-active']" [routerLinkActiveOptions]="{ exact: true }">Time</span>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/planning/timeline']">
+              <span [routerLinkActive]="['link-text-active']">Timeline</span>
             </a>
           </li>
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/setup']">
+            <a class="nav-link text-dark" [routerLink]="['/planning/setup']">
               <span [routerLinkActive]="['link-text-active']">Setup</span>
-            </a>            
+            </a>
           </li>
         </ul>
       </div>

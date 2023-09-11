@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject, BehaviorSubject, take } from 'rxjs';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
@@ -9,17 +9,22 @@ import { ValidationMessage } from './../model/validation-message';
   templateUrl: './plan-entry-delete.component.html',
   styleUrls: ['./plan-entry-delete.component.css']
 })
-export class PlanEntryDeleteComponent {
+export class PlanEntryDeleteComponent implements OnInit {
   readonly #planEntryService: PlanEntryService;
 
   public validationMessages: ValidationMessage[];
   public componentData!: PlanDeleteComponentData;
+  public description?: string;
 
   constructor(
     planEntryService: PlanEntryService)
   {
     this.#planEntryService = planEntryService;
     this.validationMessages = [];
+  }
+
+  ngOnInit(): void {
+    this.description = this.componentData?.model?.description;
   }
 
   public onCancelClick(): Subject<boolean> {

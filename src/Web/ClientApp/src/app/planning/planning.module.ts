@@ -12,6 +12,12 @@ import { PlanListComponent } from './plan-list/plan-list.component';
 import { DialogBodyDirective } from './dialogs/dialog-body.directive';
 import { BoundDialogComponent } from './dialogs/bound-dialog.component';
 import { ValidationPanelComponent } from './validation-panel/validation-panel.component';
+import { PlanTimelineComponent } from './plan-timeline/plan-timeline.component';
+
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -20,6 +26,7 @@ import { ValidationPanelComponent } from './validation-panel/validation-panel.co
     PlanEntryDeleteComponent,
     PlanListComponent,
     ValidationPanelComponent,
+    PlanTimelineComponent,
     BoundDialogComponent,
     DialogBodyDirective
   ],
@@ -28,8 +35,10 @@ import { ValidationPanelComponent } from './validation-panel/validation-panel.co
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
+    PlotlyModule,
     RouterModule.forChild([
-      { path: '', component: SetupComponent }
+      { path: 'setup', component: SetupComponent },
+      { path: 'timeline', component: PlanTimelineComponent }
     ])
   ],
   exports: [SetupComponent, RouterModule],

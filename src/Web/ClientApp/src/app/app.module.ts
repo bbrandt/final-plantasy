@@ -27,7 +27,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
-        path: 'setup', loadChildren: () => {
+        path: 'planning', loadChildren: () => {
           return import("./planning/planning.module").then(m => m.PlanningModule);
         }
       }
