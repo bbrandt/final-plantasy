@@ -3,6 +3,7 @@ import { Subject, take } from 'rxjs';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanListDataSource } from './plan-list.datasource';
 import { PlanEntryModel } from './../model/plan-entry.model';
+import { PlanType } from './../model/plan-type.enum';
 
 @Component({
   selector: 'plan-list',
@@ -42,6 +43,14 @@ export class PlanListComponent implements OnInit, OnChanges {
 
   public deletePlan(row: PlanEntryModel) {
     this.communicator.deleteClick(row);
+  }
+
+  public getAmountClass(planType: PlanType): string {
+    return planType == PlanType.Credit ? 'credit-amount' : 'debit-amount';
+  }
+
+  public getAmountIcon(planType: PlanType): string {
+    return planType == PlanType.Credit ? 'add' : 'remove';
   }
 
   private checkRefreshSubject(): void {

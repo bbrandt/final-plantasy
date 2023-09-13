@@ -9,7 +9,7 @@
 
   <ng-container matColumnDef="planType">
     <mat-header-cell *matHeaderCellDef>Plan Type</mat-header-cell>
-    <mat-cell *matCellDef="let plan">{{ plan.planType }}</mat-cell>
+    <mat-cell *matCellDef="let plan">{{ plan.planTypeName }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="eventDate">
@@ -24,12 +24,15 @@
 
   <ng-container matColumnDef="amount">
     <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-    <mat-cell *matCellDef="let plan">{{ plan.amount }}</mat-cell>
+    <mat-cell *matCellDef="let plan" [ngClass]="getAmountClass(plan.planType)">
+      <mat-icon> {{ getAmountIcon(plan.planType) }} </mat-icon>
+      $ {{ plan.amount }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="repeatOn">
     <mat-header-cell *matHeaderCellDef>Repeat On</mat-header-cell>
-    <mat-cell *matCellDef="let plan">{{ plan.repeatOn }}</mat-cell>
+    <mat-cell *matCellDef="let plan">{{ plan.repeatOnName }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="description">

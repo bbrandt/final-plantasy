@@ -11,6 +11,8 @@ internal class PlanningContextModelBuilder
         modelBuilder.HasDefaultSchema(Schemas.Planning);
 
         MapPlan(modelBuilder);
+        MapPlanType(modelBuilder);
+        MapRepeatOn(modelBuilder);
     }
 
     private static void MapPlan(ModelBuilder modelBuilder)
@@ -19,6 +21,20 @@ internal class PlanningContextModelBuilder
 
         mapping.Property(x => x.Id)
             .ValueGeneratedOnAdd();
+
+        mapping.HasKey(x => x.Id);
+    }
+
+    private static void MapPlanType(ModelBuilder modelBuilder)
+    {
+        var mapping = modelBuilder.Entity<PlanType>();
+
+        mapping.HasKey(x => x.Id);
+    }
+
+    private static void MapRepeatOn(ModelBuilder modelBuilder)
+    {
+        var mapping = modelBuilder.Entity<PlanRepeatOn>();
 
         mapping.HasKey(x => x.Id);
     }

@@ -55,9 +55,9 @@ internal class PlanBalanceCalculator
     {
         switch (expandedEvent.Entry.PlanType)
         {
-            case PlanType.Credit:
+            case PlanTypeId.Credit:
                 return balance + expandedEvent.Entry.Amount;
-            case PlanType.Debit:
+            case PlanTypeId.Debit:
                 return balance - expandedEvent.Entry.Amount;
             default:
                 throw new Exception("Unsupported plan type");

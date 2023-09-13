@@ -37,13 +37,13 @@ internal class ExpandedEventCalculator
 
         switch (entry.RepeatOn)
         {
-            case PlanRepeatOn.BiWeekly:
+            case PlanRepeatOnId.BiWeekly:
                 return ExpandEventByInterval(entry, TimeSpan.FromDays(BiWeeklyDays), endDate);
-            case PlanRepeatOn.Monthly:
+            case PlanRepeatOnId.Monthly:
                 return ExpandEventByInterval(entry, TimeSpan.FromDays(MonthlyDays), endDate);
-            case PlanRepeatOn.Yearly:
+            case PlanRepeatOnId.Yearly:
                 return ExpandEventByInterval(entry, TimeSpan.FromDays(YearlyDays), endDate);
-            case PlanRepeatOn.None:
+            case PlanRepeatOnId.None:
             default:
                 return new Collection<ExpandedEvent>
                 {

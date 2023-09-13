@@ -1,11 +1,11 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { PlanEntryModel } from './../model/plan-entry.model';
+import { PlanEntryListModel } from './../model/plan-entry-list.model';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { BehaviorSubject, Observable, catchError, finalize, of, take } from 'rxjs';
 
-export class PlanListDataSource implements DataSource<PlanEntryModel> {
+export class PlanListDataSource implements DataSource<PlanEntryListModel> {
   readonly #planEntryService: PlanEntryService;
-  readonly #planEntrySubject = new BehaviorSubject<PlanEntryModel[]>([]);
+  readonly #planEntrySubject = new BehaviorSubject<PlanEntryListModel[]>([]);
   readonly #loadingSubject = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.#loadingSubject.asObservable();
@@ -14,7 +14,7 @@ export class PlanListDataSource implements DataSource<PlanEntryModel> {
     this.#planEntryService = planEntryService;
   }
   
-  public connect(collectionViewer: CollectionViewer): Observable<readonly PlanEntryModel[]> {
+  public connect(collectionViewer: CollectionViewer): Observable<readonly PlanEntryListModel[]> {
     return this.#planEntrySubject.asObservable();
   }
 

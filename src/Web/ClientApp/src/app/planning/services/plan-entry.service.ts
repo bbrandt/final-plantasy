@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PlanEntryModel } from './../model/plan-entry.model';
+import { PlanEntryListModel } from './../model/plan-entry-list.model';
 import { UrlBuilderService } from './../../services/url-builder.service';
 import { ResultResponse } from './../model/result-response';
 import { Response } from './../model/response';
@@ -25,7 +26,7 @@ export class PlanEntryService {
     filter = '',
     sortOrder = 'asc',
     pageNumber = 0,
-    pageSize = 3): Observable<PlanEntryModel[]>
+    pageSize = 3): Observable<PlanEntryListModel[]>
   {
     const httpParams = new HttpParams()
       .set('filter', filter)
@@ -40,7 +41,7 @@ export class PlanEntryService {
     const url = this.#urlBuilder.build("api/plan-entry/list");
 
     return this.#httpClient
-      .get<PlanEntryModel[]>(url, params);
+      .get<PlanEntryListModel[]>(url, params);
   }
 
   public findPlan(id: number): Observable<PlanEntryModel> {

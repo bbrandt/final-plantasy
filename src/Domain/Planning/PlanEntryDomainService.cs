@@ -17,10 +17,10 @@ internal class PlanEntryDomainService : IPlanEntryDomainService
      * This domain is anemic but so far it does not have much behavior.
      */
     public PlanEntry CreatePlanEntry(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate)
     {
@@ -34,10 +34,10 @@ internal class PlanEntryDomainService : IPlanEntryDomainService
     }
 
     public void UpdatePlanEntry(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate,
         PlanEntry entity)

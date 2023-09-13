@@ -108,14 +108,26 @@ export class PlanEntryComponent implements OnInit {
     const modelPlanType = this.findOption(this.planTypes, model?.planType);
     const modelRepeatOn = this.findOption(this.repeatOptions, model?.repeatOn);
 
+    const eventDate = this.getDateTime(model?.eventDate);
+
+    const endDate = this.getDateTime(model?.endDate);
+
     return this.#formBuilder.group({
       planType: [modelPlanType, Validators.required],
       amount: [model?.amount, Validators.required],
-      eventDate: [model?.eventDate, Validators.required],
+      eventDate: [eventDate, Validators.required],
       description: [model?.description, Validators.required],
       repeatOn: [modelRepeatOn, Validators.required],
-      endDate: [model?.endDate]
+      endDate: [endDate]
     });
+  }
+
+  private getDateTime(modelDate: string | undefined | null): DateTime | null {
+    const dateTime = modelDate ?
+      DateTime.fromISO(modelDate) :
+      null;
+
+    return dateTime;
   }
 
   private findOption(options: OptionModel[], id: number | undefined): OptionModel | null | undefined {

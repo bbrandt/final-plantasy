@@ -14,5 +14,9 @@ namespace TRS.FinalPlantasy.Infrastructure.SqlServer.Planning.Queries
         }
 
         public IQueryable<PlanEntry> PlanEntries => _context.Set<PlanEntry>().AsNoTracking();
+
+        public IQueryable<PlanType> PlanTypes => _context.Set<PlanType>().AsNoTracking();
+
+        public IQueryable<PlanRepeatOn> PlanRepeatOns => _context.Set<PlanRepeatOn>().AsNoTracking();
     }
 }

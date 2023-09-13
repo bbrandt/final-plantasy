@@ -56,26 +56,26 @@ internal class PlanTimelineQueryHandlerTests : DatabaseIntegrationTest
         {
             new PlanEntryModel
             {
-                PlanType = PlanType.Credit,
+                PlanType = PlanTypeId.Credit,
                 Amount = 10000,
                 EventDate = new DateOnly(2023, 12, 12),
-                RepeatOn = PlanRepeatOn.None,
+                RepeatOn = PlanRepeatOnId.None,
                 Description = "Starting balance"
             },
             new PlanEntryModel
             {
-                PlanType = PlanType.Debit,
+                PlanType = PlanTypeId.Debit,
                 Amount = 500,
                 EventDate = new DateOnly(2023, 12, 12),
-                RepeatOn = PlanRepeatOn.Monthly,
+                RepeatOn = PlanRepeatOnId.Monthly,
                 Description = "Monthly Cost"
             },
             new PlanEntryModel
             {
-                PlanType = PlanType.Credit,
+                PlanType = PlanTypeId.Credit,
                 Amount = 150,
                 EventDate = new DateOnly(2023, 12, 12),
-                RepeatOn = PlanRepeatOn.Monthly,
+                RepeatOn = PlanRepeatOnId.Monthly,
                 Description = "Monthly Gain",
                 EndDate = new DateOnly(2024, 6, 1)
             }

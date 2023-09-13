@@ -6,10 +6,10 @@ public class PlanEntry
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     protected PlanEntry(
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate)
     {
@@ -23,10 +23,10 @@ public class PlanEntry
     }
 
     public static PlanEntry NewEntry(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate)
     {     
@@ -40,10 +40,10 @@ public class PlanEntry
     }
 
     public void Update(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate)
     {
@@ -57,19 +57,19 @@ public class PlanEntry
 
     public int Id { get; protected set; }
 
-    public PlanType PlanType { get; protected set; }
+    public PlanTypeId PlanType { get; protected set; }
 
     public double Amount { get; protected set; }
 
     public DateOnly EventDate { get; protected set; }
 
-    public PlanRepeatOn RepeatOn { get; protected set; }
+    public PlanRepeatOnId RepeatOn { get; protected set; }
 
     public string Description { get; protected set; }
 
     public DateOnly? EndDate { get; protected set; }
 
-    public PlanEntry CreditOrDebit(PlanType planType)
+    public PlanEntry CreditOrDebit(PlanTypeId planType)
     {
         PlanType = planType;
 
@@ -112,7 +112,7 @@ public class PlanEntry
         return this;
     }
 
-    public PlanEntry RepeatPlanOn(PlanRepeatOn repeatOn)
+    public PlanEntry RepeatPlanOn(PlanRepeatOnId repeatOn)
     {
         RepeatOn = repeatOn;
 

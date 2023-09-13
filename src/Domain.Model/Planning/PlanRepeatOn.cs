@@ -1,9 +1,14 @@
 ﻿namespace TRS.FinalPlantasy.Domain.Model.Planning;
 
-public enum PlanRepeatOn
-{ 
-    None = 0,
-    BiWeekly = 1,
-    Monthly = 2,
-    Yearly = 3
+public class PlanRepeatOn
+{
+    public PlanRepeatOn(PlanRepeatOnId id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+
+    public PlanRepeatOnId Id { get; protected set; }
+
+    public string Name { get; protected set; }
 }

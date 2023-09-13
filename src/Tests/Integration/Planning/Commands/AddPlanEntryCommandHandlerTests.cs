@@ -29,10 +29,10 @@ internal class AddPlanEntryCommandHandlerTests : DatabaseIntegrationTest
         // Act
         var model = new PlanEntryModel
         {
-            PlanType = PlanType.Credit,
+            PlanType = PlanTypeId.Credit,
             Amount = 1337.7,
             EventDate = new DateOnly(2023, 12, 12),
-            RepeatOn = PlanRepeatOn.Yearly,
+            RepeatOn = PlanRepeatOnId.Yearly,
             Description = "Tuition",
             EndDate = new DateOnly(2025, 1, 1)
         };

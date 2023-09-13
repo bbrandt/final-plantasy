@@ -26,10 +26,10 @@ internal class PlanEntryDomainServiceTests
 
         // Act
         var entry = service.CreatePlanEntry(
-            PlanType.Credit,
+            PlanTypeId.Credit,
             new DateOnly(1995, 5, 5),
             155.55,
-            PlanRepeatOn.BiWeekly,
+            PlanRepeatOnId.BiWeekly,
             "This is a new plan",
             null);
 
@@ -51,18 +51,18 @@ internal class PlanEntryDomainServiceTests
 
         // Act
         var entry = PlanEntry.NewEntry(
-            PlanType.Credit,
+            PlanTypeId.Credit,
             new DateOnly(1995, 5, 5),
             155.55,
-            PlanRepeatOn.BiWeekly,
+            PlanRepeatOnId.BiWeekly,
             "This is a new plan",
             new DateOnly(1996, 1, 1));
 
         service.UpdatePlanEntry(
-            PlanType.Debit,
+            PlanTypeId.Debit,
             new DateOnly(2005, 5, 5),
             765,
-            PlanRepeatOn.Yearly,
+            PlanRepeatOnId.Yearly,
             "This is an updated plan",
             null,
             entry);

@@ -34,10 +34,10 @@ internal class UpdatePlanEntryCommandHandlerTests : DatabaseIntegrationTest
         var model = new PlanEntryModel
         {
             Id = entryId,
-            PlanType = PlanType.Debit,
+            PlanType = PlanTypeId.Debit,
             Amount = 5555,
             EventDate = new DateOnly(1983, 12, 12),
-            RepeatOn = PlanRepeatOn.Monthly,
+            RepeatOn = PlanRepeatOnId.Monthly,
             Description = "Tuition Update",
             PersistentState = PersistentState.Updated,
             EndDate = new DateOnly(2030, 1, 1)
@@ -73,10 +73,10 @@ internal class UpdatePlanEntryCommandHandlerTests : DatabaseIntegrationTest
 
         var model = new PlanEntryModel
         {
-            PlanType = PlanType.Credit,
+            PlanType = PlanTypeId.Credit,
             Amount = 1337.7,
             EventDate = new DateOnly(2023, 12, 12),
-            RepeatOn = PlanRepeatOn.Yearly,
+            RepeatOn = PlanRepeatOnId.Yearly,
             Description = "Tuition",
             EndDate = new DateOnly(2025, 1, 1)
         };

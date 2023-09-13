@@ -16,18 +16,18 @@ public interface IPlanEntryDomainService
      * This domain is anemic but so far it does not have much behavior.
      */
     PlanEntry CreatePlanEntry(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate);
 
     void UpdatePlanEntry(
-        PlanType planType,
+        PlanTypeId planType,
         DateOnly eventDate,
         double amount,
-        PlanRepeatOn repeatOn,
+        PlanRepeatOnId repeatOn,
         string description,
         DateOnly? endDate,
         PlanEntry entity);

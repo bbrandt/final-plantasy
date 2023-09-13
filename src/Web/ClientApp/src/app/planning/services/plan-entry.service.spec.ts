@@ -2,9 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { PlanEntryService } from './plan-entry.service';
-import { PlanEntryModel } from './../model/plan-entry.model';
-import { PlanType } from './../model/plan-type.enum';
-import { PlanRepeatOn } from './../model/plan-repeat-on.enum';
+import { PlanEntryListModel } from './../model/plan-entry-list.model';
 import { PersistentState } from './../model/persistent-state.enum';
 import { take } from 'rxjs';
 
@@ -27,10 +25,10 @@ describe("PlanEntryService", () => {
   });
 
   it('findPlans returns plans', () => {
-    const testData: PlanEntryModel[] = [
-      { eventDate: '2020-05-01', planType: PlanType.Credit, amount: 500, description: "First Line", repeatOn: PlanRepeatOn.None, persistentState: PersistentState.None },
-      { eventDate: '2012-12-12', planType: PlanType.Debit, amount: 7500, description: "Second Line", repeatOn: PlanRepeatOn.BiWeekly, persistentState: PersistentState.None },
-      { eventDate: '2001-01-07', planType: PlanType.Credit, amount: 1337, description: "Third Line", repeatOn: PlanRepeatOn.Monthly, persistentState: PersistentState.None }
+    const testData: PlanEntryListModel[] = [
+      { id: 1, eventDate: '2020-05-01', planTypeName: 'Credit', amount: 500, description: "First Line", repeatOnName: 'None', persistentState: PersistentState.None },
+      { id: 2, eventDate: '2012-12-12', planTypeName: 'Debit', amount: 7500, description: "Second Line", repeatOnName: 'Bi-Weekly', persistentState: PersistentState.None },
+      { id: 3, eventDate: '2001-01-07', planTypeName: 'Credit', amount: 1337, description: "Third Line", repeatOnName: 'Monthly', persistentState: PersistentState.None }
     ];
 
     const plans = planEntryService.findPlans();

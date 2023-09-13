@@ -20,7 +20,7 @@ public class PlanEntryController : ControllerBase
 
     [HttpGet]
     [Route("/api/plan-entry/list")]
-    public async Task<IEnumerable<PlanEntryModel>> Get()
+    public async Task<IEnumerable<PlanEntryListModel>> Get()
     {
         var query = new ListPlanEntryQuery();
 
