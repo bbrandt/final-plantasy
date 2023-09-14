@@ -3,7 +3,7 @@ using TRS.FinalPlantasy.DatabaseMigrator.Infrastructure;
 
 namespace TRS.FinalPlantasy.DatabaseMigrator.Migrations._2023;
 
-[Migration(2023091319100)]
+[Migration(20230913191000)]
 public class Migration_20230913191000_AddPlanTypeAndRepeatOnTables : ForwardMigration
 {
     public override void Up()
