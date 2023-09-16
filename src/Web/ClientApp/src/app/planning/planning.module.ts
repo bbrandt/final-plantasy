@@ -4,14 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AngularMaterialModule } from './../material.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { SetupComponent } from './setup/setup.component';
 import { PlanEntryComponent } from './plan-entry/plan-entry.component';
 import { PlanEntryDeleteComponent } from './plan-entry-delete/plan-entry-delete.component';
 import { PlanListComponent } from './plan-list/plan-list.component';
-import { DialogBodyDirective } from './dialogs/dialog-body.directive';
-import { BoundDialogComponent } from './dialogs/bound-dialog.component';
-import { ValidationPanelComponent } from './validation-panel/validation-panel.component';
 import { PlanTimelineComponent } from './plan-timeline/plan-timeline.component';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
@@ -25,10 +23,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlanEntryComponent,
     PlanEntryDeleteComponent,
     PlanListComponent,
-    ValidationPanelComponent,
-    PlanTimelineComponent,
-    BoundDialogComponent,
-    DialogBodyDirective
+    PlanTimelineComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +31,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ReactiveFormsModule,
     AngularMaterialModule,
     PlotlyModule,
+    SharedModule,
     RouterModule.forChild([
       { path: 'setup', component: SetupComponent },
       { path: 'timeline', component: PlanTimelineComponent }

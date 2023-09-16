@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, take } from 'rxjs';
 import { PlanEntryComponent } from './../plan-entry/plan-entry.component';
-import { BoundDialogComponent } from './../dialogs/bound-dialog.component';
-import { BoundDialogData } from './../dialogs/bound-dialog-data.interface';
+import { BoundDialogComponent } from '@shared/dialogs/bound-dialog.component';
+import { BoundDialogData } from '@shared/dialogs/bound-dialog-data.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PlanEntryService } from './plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';

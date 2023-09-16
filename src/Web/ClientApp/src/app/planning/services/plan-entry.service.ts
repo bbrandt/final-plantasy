@@ -4,8 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { PlanEntryModel } from './../model/plan-entry.model';
 import { PlanEntryListModel } from './../model/plan-entry-list.model';
 import { UrlBuilderService } from './../../services/url-builder.service';
-import { ResultResponse } from './../model/result-response';
-import { Response } from './../model/response';
+import { ResultResponse } from '@shared/model/result-response';
+import { Response } from '@shared/model/response';
 
 @Injectable({
   providedIn: 'root'

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, BehaviorSubject, take } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
-import { OptionModel } from './../model/option.model';
+import { OptionModel } from '@shared/model/option.model';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanOptionService } from './../services/plan-option.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
-import { ValidationMessage } from './../model/validation-message';
-import { PersistentState } from './../model/persistent-state.enum';
+import { ValidationMessage } from '@shared/model/validation-message';
+import { PersistentState } from '@shared/model/persistent-state.enum';
 
 @Component({
   selector: 'plan-entry',

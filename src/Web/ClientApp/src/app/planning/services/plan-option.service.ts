@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { OptionModel } from './../model/option.model';
+import { OptionModel } from '@shared/model/option.model';
 import { PlanType } from './../model/plan-type.enum';
 import { PlanRepeatOn } from './../model/plan-repeat-on.enum';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, BehaviorSubject, take } from 'rxjs';
 import { PlanEntryService } from './../services/plan-entry.service';
 import { PlanEntryModel } from './../model/plan-entry.model';
-import { ValidationMessage } from './../model/validation-message';
+import { ValidationMessage } from '@shared/model/validation-message';
 
 @Component({
   selector: 'plan-entry-delete',
