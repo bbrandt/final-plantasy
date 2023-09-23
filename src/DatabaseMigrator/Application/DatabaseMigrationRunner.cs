@@ -16,7 +16,7 @@ public class DatabaseMigrationRunner
             throw new NullReferenceException("Connection string is required for migrations");
         }
 
-        var services = BuildServiceProvider(options.ConnectionString);
+        var services = BuildServiceProvider(options);
 
         await CreateDatabaseAsync(
             services, 
@@ -31,7 +31,7 @@ public class DatabaseMigrationRunner
         string connectionString, 
         CancellationToken cancellationToken)
     {
-        var creator = services.GetRequiredService<DatabaseCreator>();
+        var creator = services.GetRequiredService<IDatabaseCreator>();
 
         await creator.CreateAsync(connectionString, cancellationToken);
     }
@@ -43,26 +43,36 @@ public class DatabaseMigrationRunner
         runner.MigrateUp();
     }
 
-    private static IServiceProvider BuildServiceProvider(string connectionString)
+    private static IServiceProvider BuildServiceProvider(MigratorOptions options)
     {
         var collection = new ServiceCollection();
 
         collection
-            .AddMigrationApplication()
-            .AddFluentMigratorCore()
+            .AddMigrationApplication(options.DatabaseType)
+            .AddFluentMigratorCore();
+
+        collection
             .ConfigureRunner(configure => 
             {
+                configure.WithGlobalConnectionString(options.ConnectionString);
+
                 configure.ScanIn(typeof(DatabaseMigrationRunner).Assembly)
                     .For
                     .Migrations();
 
-                configure.AddSqlServer2016();
+                switch (options.DatabaseType)
+                {
+                    case MigratorDatabaseType.SqlServer:
+                        configure.AddSqlServer2016();
+                        break;
+                    case MigratorDatabaseType.Sqlite:
+                        configure.AddSQLite();
+                        break;
+                    default:
+                        throw new Exception("The database type is unknown");
+                }
             })
-            .AddLogging(configure => configure.AddFluentMigratorConsole().SetMinimumLevel(LogLevel.Information))
-            .Configure<ProcessorOptions>(opt => 
-            {
-                opt.ConnectionString = connectionString;
-            });
+            .AddLogging(configure => configure.AddFluentMigratorConsole().SetMinimumLevel(LogLevel.Information));
 
         var serviceProvider = collection.BuildServiceProvider();
 

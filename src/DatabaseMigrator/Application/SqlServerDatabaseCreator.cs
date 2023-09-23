@@ -2,9 +2,11 @@
 
 namespace TRS.FinalPlantasy.DatabaseMigrator.Application;
 
-internal class DatabaseCreator
+internal class SqlServerDatabaseCreator : IDatabaseCreator
 {
-    public async Task CreateAsync(string connectionString, CancellationToken cancellationToken)
+    public async Task CreateAsync(
+        string connectionString, 
+        CancellationToken cancellationToken)
     {
         var databaseInformation = GetDatabaseInformation(connectionString);
 
