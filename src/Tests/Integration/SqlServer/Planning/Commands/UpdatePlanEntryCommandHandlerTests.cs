@@ -13,13 +13,18 @@ namespace TRS.FinalPlantasy.Tests.Integration.SqlServer.Planning.Commands;
 [IntegrationTest]
 internal class UpdatePlanEntryCommandHandlerTests : SqlServerDatabaseIntegrationTest
 {
-    private IServiceProvider? _serviceProvider;
+    private IServiceScope? _testServiceScope;
 
     protected override void Setup(IEnumerable<TestConfiguration> configuration)
     {
         var collection = TestServiceCollectionCreator.CreateWithSqlServer(configuration);
 
-        _serviceProvider = collection.BuildServiceProvider();
+        _testServiceScope = collection.BuildServiceProvider().CreateScope();
+    }
+
+    protected override void TearDown()
+    {
+        _testServiceScope?.Dispose();
     }
 
     [Test]
@@ -28,7 +33,7 @@ internal class UpdatePlanEntryCommandHandlerTests : SqlServerDatabaseIntegration
         // Arrange
         var entryId = await CreateNewEntry();
 
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         // Act
         var model = new PlanEntryModel
@@ -69,7 +74,7 @@ internal class UpdatePlanEntryCommandHandlerTests : SqlServerDatabaseIntegration
 
     private async Task<int> CreateNewEntry()
     {
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         var model = new PlanEntryModel
         {

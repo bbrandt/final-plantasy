@@ -13,13 +13,18 @@ namespace TRS.FinalPlantasy.Tests.Integration.SqlServer.Planning.Queries;
 [IntegrationTest]
 internal class PlanTimelineQueryHandlerTests : SqlServerDatabaseIntegrationTest
 {
-    private IServiceProvider? _serviceProvider;
+    private IServiceScope? _testServiceScope;
 
     protected override void Setup(IEnumerable<TestConfiguration> configuration)
     {
         var collection = TestServiceCollectionCreator.CreateWithSqlServer(configuration);
 
-        _serviceProvider = collection.BuildServiceProvider();
+        _testServiceScope = collection.BuildServiceProvider().CreateScope();
+    }
+
+    protected override void TearDown()
+    {
+        _testServiceScope?.Dispose();
     }
 
     [Test]
@@ -28,7 +33,7 @@ internal class PlanTimelineQueryHandlerTests : SqlServerDatabaseIntegrationTest
         // Arrange
         await CreateEntries();
 
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         // Act
         var query = new PlanTimelineQuery
@@ -50,7 +55,7 @@ internal class PlanTimelineQueryHandlerTests : SqlServerDatabaseIntegrationTest
 
     private async Task CreateEntries()
     {
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         var models = new Collection<PlanEntryModel>
         {

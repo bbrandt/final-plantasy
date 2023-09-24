@@ -35,6 +35,8 @@ public abstract class SqlServerDatabaseIntegrationTest
 
     protected abstract void Setup(IEnumerable<TestConfiguration> configuration);
 
+    protected abstract void TearDown();
+
     private static async Task StartSqlServerAsync(MsSqlContainer sqlContainer)
     {
         await sqlContainer.StartAsync();
@@ -51,9 +53,11 @@ public abstract class SqlServerDatabaseIntegrationTest
     }
 
     [TearDown]
-    public async Task TearDown()
+    public async Task Dispose()
     {
         var container = _testContainers[TestContext.CurrentContext.Test.Name];
+
+        TearDown();
 
         await container.DisposeAsync();
     }

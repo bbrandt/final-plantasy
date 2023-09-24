@@ -12,13 +12,18 @@ namespace TRS.FinalPlantasy.Tests.Integration.SqlServer.Planning.Commands;
 [IntegrationTest]
 internal class DeletePlanEntryCommandHandlerTests : SqlServerDatabaseIntegrationTest
 {
-    private IServiceProvider? _serviceProvider;
+    private IServiceScope? _testServiceScope;
 
     protected override void Setup(IEnumerable<TestConfiguration> configuration)
     {
         var collection = TestServiceCollectionCreator.CreateWithSqlServer(configuration);
 
-        _serviceProvider = collection.BuildServiceProvider();
+        _testServiceScope = collection.BuildServiceProvider().CreateScope();
+    }
+
+    protected override void TearDown()
+    {
+        _testServiceScope?.Dispose();
     }
 
     [Test]
@@ -27,7 +32,7 @@ internal class DeletePlanEntryCommandHandlerTests : SqlServerDatabaseIntegration
         // Arrange
         var entryId = await CreateNewEntry();
 
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         // Act
         var command = new DeletePlanEntryCommand
@@ -56,7 +61,7 @@ internal class DeletePlanEntryCommandHandlerTests : SqlServerDatabaseIntegration
 
     private async Task<int> CreateNewEntry()
     {
-        var mediator = _serviceProvider!.GetRequiredService<IMediator>();
+        var mediator = _testServiceScope!.ServiceProvider.GetRequiredService<IMediator>();
 
         var model = new PlanEntryModel
         {
