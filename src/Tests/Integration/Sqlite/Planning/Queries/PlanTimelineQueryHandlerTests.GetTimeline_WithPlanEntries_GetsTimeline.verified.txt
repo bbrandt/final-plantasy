@@ -1,0 +1,105 @@
+﻿{
+  response: {
+    Events: [
+      {
+        Date: 2023-12-12,
+        Balance: 9650.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain,
+          Starting balance
+        ]
+      },
+      {
+        Date: 2024-01-11,
+        Balance: 9300.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-02-10,
+        Balance: 8950.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-03-11,
+        Balance: 8600.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-04-10,
+        Balance: 8250.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-05-10,
+        Balance: 7900.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-06-09,
+        Balance: 7550.0,
+        Descriptions: [
+          Monthly Cost,
+          Monthly Gain
+        ]
+      },
+      {
+        Date: 2024-07-09,
+        Balance: 7050.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      },
+      {
+        Date: 2024-08-08,
+        Balance: 6550.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      },
+      {
+        Date: 2024-09-07,
+        Balance: 6050.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      },
+      {
+        Date: 2024-10-07,
+        Balance: 5550.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      },
+      {
+        Date: 2024-11-06,
+        Balance: 5050.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      },
+      {
+        Date: 2024-12-06,
+        Balance: 4550.0,
+        Descriptions: [
+          Monthly Cost
+        ]
+      }
+    ]
+  }
+}

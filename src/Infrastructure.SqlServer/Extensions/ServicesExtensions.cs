@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TRS.FinalPlantasy.Application.Abstractions.Planning.Queries;
-using TRS.FinalPlantasy.Application.Abstractions.Planning.Repositories;
-using TRS.FinalPlantasy.Infrastructure.SqlServer.Common;
+using TRS.FinalPlantasy.Infrastructure.EntityFramework.Extensions;
+using TRS.FinalPlantasy.Infrastructure.EntityFramework.Planning;
 using TRS.FinalPlantasy.Infrastructure.SqlServer.Planning;
-using TRS.FinalPlantasy.Infrastructure.SqlServer.Planning.Queries;
-using TRS.FinalPlantasy.Infrastructure.SqlServer.Planning.Repositories;
 
 namespace TRS.FinalPlantasy.Infrastructure.SqlServer.Extensions;
 
@@ -12,21 +9,9 @@ public static class ServicesExtensions
 {
     public static IServiceCollection AddSqlServerPersistence(this IServiceCollection services)
     {
-        services.AddPlanning();
+        services.AddPlanningPersistence();
 
-        return services;
-    }
-
-    private static IServiceCollection AddPlanning(this IServiceCollection services)
-    {
-        services.AddTransient<PlanningContextConfiguration>();
-        services.AddTransient<PlanningContextModelBuilder>();
-        services.AddDbContext<PlanningContext>(ServiceLifetime.Scoped);
-
-        services.AddTransient<IPlanningQueryContext, PlanningQueryContext>();
-        services.AddTransient<IPlanEntryRepository, PlanEntryRepository>();
-        services.AddTransient<IPlanEntryUnitOfWorkFactory, PlanEntryUnitOfWorkFactory>();
-        services.AddTransient<IUnitOfWorkCreator<IPlanEntryUnitOfWork>, PlanEntryUnitOfWorkCreator>();
+        services.AddTransient<IPlanningContextConfiguration, PlanningContextConfiguration>();
 
         return services;
     }

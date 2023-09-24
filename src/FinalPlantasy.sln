@@ -31,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Sqlite", "Infrastructure.Sqlite\Infrastructure.Sqlite.csproj", "{F717D3EF-6D6E-4EB7-B4EF-A2053ED3384D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EntityFramework", "Infrastructure.EntityFramework\Infrastructure.EntityFramework.csproj", "{26CD7FFF-04B2-42F7-9800-A826FEF4B17C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,14 @@ Global
 		{022661CA-C090-418A-958E-6A3DCCE3226A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{022661CA-C090-418A-958E-6A3DCCE3226A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{022661CA-C090-418A-958E-6A3DCCE3226A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F717D3EF-6D6E-4EB7-B4EF-A2053ED3384D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F717D3EF-6D6E-4EB7-B4EF-A2053ED3384D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F717D3EF-6D6E-4EB7-B4EF-A2053ED3384D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F717D3EF-6D6E-4EB7-B4EF-A2053ED3384D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CD7FFF-04B2-42F7-9800-A826FEF4B17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CD7FFF-04B2-42F7-9800-A826FEF4B17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CD7FFF-04B2-42F7-9800-A826FEF4B17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CD7FFF-04B2-42F7-9800-A826FEF4B17C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

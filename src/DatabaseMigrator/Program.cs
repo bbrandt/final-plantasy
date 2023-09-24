@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using CommandLine;
 using Serilog;
 using TRS.FinalPlantasy.DatabaseMigrator.Application;
 using TRS.FinalPlantasy.DatabaseMigrator.Infrastructure;
@@ -14,9 +13,12 @@ try
 {
     startupLogger.Information("Starting up!");
 
-    var configuration = BuildConfiguration();
-
-    await RunApplicationAsync(startupLogger);
+    Parser.Default.ParseArguments<CommandLineOptions>(args)
+        .WithParsed(
+            async (options) => 
+            { 
+                await RunApplicationAsync(options, startupLogger);  
+            });
 
     return 0;
 }
@@ -33,13 +35,13 @@ finally
     Log.CloseAndFlush();
 }
 
-static async Task RunApplicationAsync(Serilog.ILogger logger)
+static async Task RunApplicationAsync(CommandLineOptions commandLineOptions, Serilog.ILogger logger)
 {
     var cts = ConfigureCancellation(logger);
 
     logger.Information("Running Application - Press CTRL+C to end");
 
-    var options = ReadOptions();
+    var options = MigratorOptionsReader.Read(commandLineOptions);
     var migrator = new DatabaseMigrationRunner();
 
     await migrator.RunAsync(options, cts.Token);
@@ -59,27 +61,4 @@ static CancellationTokenSource ConfigureCancellation(Serilog.ILogger logger)
     };
 
     return cts;
-}
-
-static MigratorOptions ReadOptions()
-{
-    var configuration = BuildConfiguration();
-
-    var migratorOptions = new MigratorOptions();
-
-    configuration.GetRequiredSection(nameof(MigratorOptions))
-        .Bind(migratorOptions);
-
-    return migratorOptions;
-}
-
-static IConfiguration BuildConfiguration()
-{
-    var builder = new ConfigurationBuilder();
-
-    var configuration = builder.AddJsonFile("appsettings.json")
-        .AddUserSecrets<Program>(optional: true)
-        .Build();
-
-    return configuration;
 }

@@ -12,7 +12,9 @@ namespace TRS.FinalPlantasy.Application.Extensions;
 
 public static class ServicesExtensions
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration) 
+    public static IServiceCollection AddApplication(
+        this IServiceCollection services, 
+        IConfiguration configuration) 
     {
         services.AddMediatR(configure => configure.RegisterServicesFromAssembly(typeof(ServicesExtensions).Assembly));
 
