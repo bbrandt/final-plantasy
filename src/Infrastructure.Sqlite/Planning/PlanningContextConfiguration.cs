@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using TRS.FinalPlantasy.Application.Abstractions.Options;
 using TRS.FinalPlantasy.Infrastructure.EntityFramework.Planning;
 
-namespace TRS.FinalPlantasy.Infrastructure.SqlServer.Planning;
+namespace TRS.FinalPlantasy.Infrastructure.Sqlite.Planning;
 
 internal class PlanningContextConfiguration : IPlanningContextConfiguration
 {
@@ -23,7 +23,7 @@ internal class PlanningContextConfiguration : IPlanningContextConfiguration
             throw new Exception($"Connection string is not defined for {nameof(PlanningOptions)}");
         }
 
-        optionsBuilder.UseSqlServer(connectionString);
+        optionsBuilder.UseSqlite(connectionString);
     }
 }
 

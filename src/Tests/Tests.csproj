@@ -25,6 +25,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Polly" Version="7.2.4" />
     <PackageReference Include="Shouldly" Version="4.2.1" />
     <PackageReference Include="Testcontainers.MsSql" Version="3.4.0" />
     <PackageReference Include="Verify.NUnit" Version="21.0.0" />
@@ -35,6 +36,7 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\DatabaseMigrator\DatabaseMigrator.csproj" />
     <ProjectReference Include="..\Domain.Abstractions\Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\Infrastructure.Sqlite\Infrastructure.Sqlite.csproj" />
     <ProjectReference Include="..\Infrastructure.SqlServer\Infrastructure.SqlServer.csproj" />
   </ItemGroup>
 
@@ -42,12 +44,21 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Integration\Planning\Commands\UpdatePlanEntryCommandHandlerTests.NewPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
+    <None Update="Integration\Sqlite\Planning\Commands\AddPlanEntryCommandHandlerTests.AddPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
       <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
-      <DependentUpon>UpdatePlanEntryCommandHandlerTests.cs</DependentUpon>
+      <DependentUpon>%(ParentFile).cs</DependentUpon>
     </None>
-    <None Update="Integration\Planning\Commands\AddPlanEntryCommandHandlerTests.NewPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
-      <DependentUpon>AddPlanEntryCommandHandlerTests.cs</DependentUpon>
+    <None Update="Integration\Sqlite\Planning\Commands\DeletePlanEntryCommandHandlerTests.DeletePlanEntryCommand_WithPlanEntry_DeletesNewPlanEntry.verified.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <DependentUpon>%(ParentFile).cs</DependentUpon>
+    </None>
+    <None Update="Integration\Sqlite\Planning\Commands\UpdatePlanEntryCommandHandlerTests.UpdatePlanEntryCommand_WithPlanEntry_UpdatesNewPlanEntry.verified.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <DependentUpon>%(ParentFile).cs</DependentUpon>
+    </None>
+    <None Update="Integration\Sqlite\Planning\Queries\PlanTimelineQueryHandlerTests.GetTimeline_WithPlanEntries_GetsTimeline.verified.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <DependentUpon>%(ParentFile).cs</DependentUpon>
     </None>
     <None Update="Unit\Domain\Planning\PlanningEntryDomainServiceTests.AddPlanEntryCommand_WithPlanEntry_CreatesNewPlanEntry.verified.txt">
       <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>

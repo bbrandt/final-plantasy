@@ -11,9 +11,9 @@ try
 {
     startupLogger.Information("Starting up!");
 
-    var builder = ApplicationWebApplicationBuilderCreator.Create(args, startupLogger);
+    var builder = MainWebApplicationBuilderCreator.Create(args, startupLogger);
 
-    var app = ApplicationWebApplicationBuilder.Build(builder, startupLogger);
+    var app = MainWebApplicationBuilder.Build(builder, startupLogger);
 
     await RunApplicationAsync(app, startupLogger);
 
