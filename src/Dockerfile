@@ -15,7 +15,11 @@ WORKDIR /src
 # copy everything
 COPY . ./
 # restore as distinct layers
-RUN dotnet restore Web/Web.csproj
+RUN dotnet restore FinalPlantasy.sln
+
+# build and publish a release
+RUN dotnet publish DatabaseMigrator/DatabaseMigrator.csproj -c Release -o /app
+
 # build and publish a release
 RUN dotnet publish Web/Web.csproj -c Release -o /app
 
