@@ -32,7 +32,7 @@ proxy:
 # the last command to be long-running (e.g. an application server). When the
 # last command exits, LiteFS is shut down.
 exec:
-  - cmd: "dotnet TRS.FinalPlantasy.DatabaseMigrator.dll /litefs/my.db"
+  - cmd: "dotnet TRS.FinalPlantasy.DatabaseMigrator.dll --connection-string \"Data Source=/litefs/my.db\" --type Sqlite" 
     if-candidate: true
 
   - cmd: "dotnet TRS.FinalPlantasy.Web.dll"
