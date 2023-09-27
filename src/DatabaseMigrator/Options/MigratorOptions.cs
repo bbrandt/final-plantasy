@@ -12,7 +12,7 @@ public class MigratorOptions
     {
         var builder = new SqliteConnectionStringBuilder
         {
-            DataSource = "./litefs/final-plantasy.db"
+            DataSource = "/litefs/my.db"
         };
 
         return new MigratorOptions
