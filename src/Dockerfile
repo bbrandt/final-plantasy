@@ -18,7 +18,7 @@ COPY . ./
 RUN dotnet restore FinalPlantasy.sln
 
 # build and publish a release
-RUN dotnet publish DatabaseMigrator/DatabaseMigrator.csproj -c Release -o /app
+RUN dotnet publish DatabaseMigrator/DatabaseMigrator.csproj -c Release -o /migrator
 
 # build and publish a release
 RUN dotnet publish Web/Web.csproj -c Release -o /app
@@ -34,6 +34,7 @@ ENV ASPNETCORE_ENVIRONMENT Production
 EXPOSE 8081
 
 WORKDIR /app
+COPY --from=build /migrator .
 COPY --from=build /app .
 RUN cp ./litefs.yml /etc/litefs.yml
 ENTRYPOINT litefs mount
